@@ -1,15 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30709.64
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{070F6CD7-8AC4-4E66-99CF-B53DD4B8CD6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nSense", "src\UnOffSiSenseDotNet\UnOffSiSenseDotNet.csproj", "{2B9EF28E-C57D-48CF-89B7-4BF245DBA476}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnOffSiSenseDotNet", "src\UnOffSiSenseDotNet\UnOffSiSenseDotNet.csproj", "{2B9EF28E-C57D-48CF-89B7-4BF245DBA476}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FFF82E8B-0113-4222-BD12-A5D6CA3A8330}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnOffSiSenseDotNet.test", "tests\UnOffSiSenseDotNet.test\UnOffSiSenseDotNet.test.csproj", "{7B0F00DB-1870-44D1-ABAA-2305DB9C0538}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnOffSiSenseDotNet.test", "tests\UnOffSiSenseDotNet.test\UnOffSiSenseDotNet.test.csproj", "{7B0F00DB-1870-44D1-ABAA-2305DB9C0538}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A391CCE9-DAF3-4ACD-AC04-6E54D88BE557}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+		v0.9.json = v0.9.json
+		v1.0.errors.txt = v1.0.errors.txt
+		v1.0.json = v1.0.json
+		v1.0.orig.json = v1.0.orig.json
+		v1.0.sample.json = v1.0.sample.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,9 +30,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{2B9EF28E-C57D-48CF-89B7-4BF245DBA476}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -49,8 +57,14 @@ Global
 		{7B0F00DB-1870-44D1-ABAA-2305DB9C0538}.Release|x86.ActiveCfg = Release|Any CPU
 		{7B0F00DB-1870-44D1-ABAA-2305DB9C0538}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2B9EF28E-C57D-48CF-89B7-4BF245DBA476} = {070F6CD7-8AC4-4E66-99CF-B53DD4B8CD6A}
 		{7B0F00DB-1870-44D1-ABAA-2305DB9C0538} = {FFF82E8B-0113-4222-BD12-A5D6CA3A8330}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F9DAFBE2-B820-445C-A042-30F6EE7455CA}
 	EndGlobalSection
 EndGlobal
