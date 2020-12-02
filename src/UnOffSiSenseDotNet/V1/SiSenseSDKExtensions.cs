@@ -620,6 +620,1179 @@ namespace UnOffSiSenseDotNet.V1
             }
 
             /// <summary>
+            /// Analyze card structure
+            /// </summary>
+            /// <remarks>
+            /// Analyze the types of elements and actions being used within the card
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='path'>
+            /// The path of the cards to get
+            /// </param>
+            /// <param name='body'>
+            /// Basic cards object (in `JSON` notation) to be analyzed
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            public static object CardAnalysis(this ISiSenseSDK operations, string path, object body, string authorization = default(string))
+            {
+                return operations.CardAnalysisAsync(path, body, authorization).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Analyze card structure
+            /// </summary>
+            /// <remarks>
+            /// Analyze the types of elements and actions being used within the card
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='path'>
+            /// The path of the cards to get
+            /// </param>
+            /// <param name='body'>
+            /// Basic cards object (in `JSON` notation) to be analyzed
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> CardAnalysisAsync(this ISiSenseSDK operations, string path, object body, string authorization = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.CardAnalysisWithHttpMessagesAsync(path, body, authorization, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Return email server settings
+            /// </summary>
+            /// <remarks>
+            /// The **email server settings** used for Email Server settings managing.
+            ///
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static object GetEmailServer(this ISiSenseSDK operations)
+            {
+                return operations.GetEmailServerAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Return email server settings
+            /// </summary>
+            /// <remarks>
+            /// The **email server settings** used for Email Server settings managing.
+            ///
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetEmailServerAsync(this ISiSenseSDK operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetEmailServerWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Add email server settings
+            /// </summary>
+            /// <remarks>
+            /// The **email server settings** used for Email Server settings managing.
+            ///
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='emailServer'>
+            /// Object with the settings of email server
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            public static AddEmailServerOKResponse AddEmailServer(this ISiSenseSDK operations, EmailServer emailServer, string authorization = default(string))
+            {
+                return operations.AddEmailServerAsync(emailServer, authorization).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Add email server settings
+            /// </summary>
+            /// <remarks>
+            /// The **email server settings** used for Email Server settings managing.
+            ///
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='emailServer'>
+            /// Object with the settings of email server
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<AddEmailServerOKResponse> AddEmailServerAsync(this ISiSenseSDK operations, EmailServer emailServer, string authorization = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.AddEmailServerWithHttpMessagesAsync(emailServer, authorization, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Update email server settings
+            /// </summary>
+            /// <remarks>
+            /// The **email server settings** used for Email Server settings managing.
+            ///
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='emailServer'>
+            /// Object with the settings of email server
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            public static UpdateEmailServerOKResponse UpdateEmailServer(this ISiSenseSDK operations, EmailServerModel emailServer, string authorization = default(string))
+            {
+                return operations.UpdateEmailServerAsync(emailServer, authorization).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Update email server settings
+            /// </summary>
+            /// <remarks>
+            /// The **email server settings** used for Email Server settings managing.
+            ///
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='emailServer'>
+            /// Object with the settings of email server
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<UpdateEmailServerOKResponse> UpdateEmailServerAsync(this ISiSenseSDK operations, EmailServerModel emailServer, string authorization = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.UpdateEmailServerWithHttpMessagesAsync(emailServer, authorization, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Delete email server settings
+            /// </summary>
+            /// <remarks>
+            /// The **email server settings** used for Email Server settings managing.
+            ///
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static void DeleteEmailServer(this ISiSenseSDK operations)
+            {
+                operations.DeleteEmailServerAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Delete email server settings
+            /// </summary>
+            /// <remarks>
+            /// The **email server settings** used for Email Server settings managing.
+            ///
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task DeleteEmailServerAsync(this ISiSenseSDK operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.DeleteEmailServerWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Return public configuration settings
+            /// </summary>
+            /// <remarks>
+            /// The **Public Configuration** used for getting public system settings.
+            ///
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static GetPublicSettingsOKResponse GetPublicSettings(this ISiSenseSDK operations)
+            {
+                return operations.GetPublicSettingsAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Return public configuration settings
+            /// </summary>
+            /// <remarks>
+            /// The **Public Configuration** used for getting public system settings.
+            ///
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<GetPublicSettingsOKResponse> GetPublicSettingsAsync(this ISiSenseSDK operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetPublicSettingsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Returns sso settings.
+            /// </summary>
+            /// <remarks>
+            /// The **sso settings** used for single sign on configuration.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static object GetSsoSettings(this ISiSenseSDK operations)
+            {
+                return operations.GetSsoSettingsAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Returns sso settings.
+            /// </summary>
+            /// <remarks>
+            /// The **sso settings** used for single sign on configuration.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetSsoSettingsAsync(this ISiSenseSDK operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetSsoSettingsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Set sso settings.
+            /// </summary>
+            /// <remarks>
+            /// The **sso settings** used for single sign on configuration.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='sso'>
+            /// Object with the sso settings.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            public static object SetSsoSettings(this ISiSenseSDK operations, Sso sso, string authorization = default(string))
+            {
+                return operations.SetSsoSettingsAsync(sso, authorization).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Set sso settings.
+            /// </summary>
+            /// <remarks>
+            /// The **sso settings** used for single sign on configuration.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='sso'>
+            /// Object with the sso settings.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> SetSsoSettingsAsync(this ISiSenseSDK operations, Sso sso, string authorization = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.SetSsoSettingsWithHttpMessagesAsync(sso, authorization, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Returns system configuration settings.
+            /// </summary>
+            /// <remarks>
+            /// The **system settings** used for system settings configuration.
+            ///
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static object GetSystemSettings(this ISiSenseSDK operations)
+            {
+                return operations.GetSystemSettingsAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Returns system configuration settings.
+            /// </summary>
+            /// <remarks>
+            /// The **system settings** used for system settings configuration.
+            ///
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetSystemSettingsAsync(this ISiSenseSDK operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetSystemSettingsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Adds or updates system settings.
+            /// </summary>
+            /// <remarks>
+            /// The **system settings** used for system settings configuration.
+            ///
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='emailServer'>
+            /// Object with the system settings.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            public static object SetSystemSettings(this ISiSenseSDK operations, EmailServerModelModel emailServer, string authorization = default(string))
+            {
+                return operations.SetSystemSettingsAsync(emailServer, authorization).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Adds or updates system settings.
+            /// </summary>
+            /// <remarks>
+            /// The **system settings** used for system settings configuration.
+            ///
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='emailServer'>
+            /// Object with the system settings.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> SetSystemSettingsAsync(this ISiSenseSDK operations, EmailServerModelModel emailServer, string authorization = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.SetSystemSettingsWithHttpMessagesAsync(emailServer, authorization, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Returns globalization settings
+            /// </summary>
+            /// <remarks>
+            /// Returns locale settings, including the set locale, and whether autodetect
+            /// is enabled.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            public static object GetGlobalization(this ISiSenseSDK operations, string authorization = default(string))
+            {
+                return operations.GetGlobalizationAsync(authorization).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Returns globalization settings
+            /// </summary>
+            /// <remarks>
+            /// Returns locale settings, including the set locale, and whether autodetect
+            /// is enabled.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetGlobalizationAsync(this ISiSenseSDK operations, string authorization = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetGlobalizationWithHttpMessagesAsync(authorization, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Add globalization settings
+            /// </summary>
+            /// <remarks>
+            /// You can change the locale or select whether the localization selection is
+            /// automatically detected or not.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='globalization'>
+            /// Object with the globalization settings.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            public static object Add(this ISiSenseSDK operations, Globalization globalization, string authorization = default(string))
+            {
+                return operations.AddAsync(globalization, authorization).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Add globalization settings
+            /// </summary>
+            /// <remarks>
+            /// You can change the locale or select whether the localization selection is
+            /// automatically detected or not.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='globalization'>
+            /// Object with the globalization settings.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> AddAsync(this ISiSenseSDK operations, Globalization globalization, string authorization = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.AddWithHttpMessagesAsync(globalization, authorization, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Update globalization settings
+            /// </summary>
+            /// <remarks>
+            /// You can update the locale or select whether the localization selection is
+            /// automatically detected or not.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='globalization'>
+            /// Object with the globalization settings.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            public static object Update(this ISiSenseSDK operations, Globalization globalization, string authorization = default(string))
+            {
+                return operations.UpdateAsync(globalization, authorization).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Update globalization settings
+            /// </summary>
+            /// <remarks>
+            /// You can update the locale or select whether the localization selection is
+            /// automatically detected or not.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='globalization'>
+            /// Object with the globalization settings.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> UpdateAsync(this ISiSenseSDK operations, Globalization globalization, string authorization = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.UpdateWithHttpMessagesAsync(globalization, authorization, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Delete globalization settings
+            /// </summary>
+            /// <remarks>
+            /// Deletes globalization settings in your server.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            public static object RemoveGlobalization(this ISiSenseSDK operations, string authorization = default(string))
+            {
+                return operations.RemoveGlobalizationAsync(authorization).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Delete globalization settings
+            /// </summary>
+            /// <remarks>
+            /// Deletes globalization settings in your server.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> RemoveGlobalizationAsync(this ISiSenseSDK operations, string authorization = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.RemoveGlobalizationWithHttpMessagesAsync(authorization, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Returns translation settings
+            /// </summary>
+            /// <remarks>
+            /// Returns all the settings for the translation service
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            public static object GetTranslation(this ISiSenseSDK operations, string authorization = default(string))
+            {
+                return operations.GetTranslationAsync(authorization).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Returns translation settings
+            /// </summary>
+            /// <remarks>
+            /// Returns all the settings for the translation service
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetTranslationAsync(this ISiSenseSDK operations, string authorization = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetTranslationWithHttpMessagesAsync(authorization, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Returns pulse settings.
+            /// </summary>
+            /// <remarks>
+            /// The **pulse settings** used for store pulse page configuration.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static object GetPulseSettings(this ISiSenseSDK operations)
+            {
+                return operations.GetPulseSettingsAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Returns pulse settings.
+            /// </summary>
+            /// <remarks>
+            /// The **pulse settings** used for store pulse page configuration.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetPulseSettingsAsync(this ISiSenseSDK operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetPulseSettingsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Set pulse settings.
+            /// </summary>
+            /// <remarks>
+            /// The **pulse settings** used for store pulse page configuration.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='pulse'>
+            /// Object with the pulse settings.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            public static object SetPulseSettings(this ISiSenseSDK operations, Pulse pulse, string authorization = default(string))
+            {
+                return operations.SetPulseSettingsAsync(pulse, authorization).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Set pulse settings.
+            /// </summary>
+            /// <remarks>
+            /// The **pulse settings** used for store pulse page configuration.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='pulse'>
+            /// Object with the pulse settings.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> SetPulseSettingsAsync(this ISiSenseSDK operations, Pulse pulse, string authorization = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.SetPulseSettingsWithHttpMessagesAsync(pulse, authorization, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Patch pulse settings.
+            /// </summary>
+            /// <remarks>
+            /// The **pulse settings** used for store pulse page configuration.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='pulse'>
+            /// Object with the pulse settings.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            public static object Patch(this ISiSenseSDK operations, Pulse pulse, string authorization = default(string))
+            {
+                return operations.PatchAsync(pulse, authorization).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Patch pulse settings.
+            /// </summary>
+            /// <remarks>
+            /// The **pulse settings** used for store pulse page configuration.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='pulse'>
+            /// Object with the pulse settings.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> PatchAsync(this ISiSenseSDK operations, Pulse pulse, string authorization = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.PatchWithHttpMessagesAsync(pulse, authorization, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Delete pulse settings.
+            /// </summary>
+            /// <remarks>
+            /// The **pulse settings** used for store pulse page configuration.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            public static object RemovePulseSettings(this ISiSenseSDK operations, string authorization = default(string))
+            {
+                return operations.RemovePulseSettingsAsync(authorization).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Delete pulse settings.
+            /// </summary>
+            /// <remarks>
+            /// The **pulse settings** used for store pulse page configuration.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> RemovePulseSettingsAsync(this ISiSenseSDK operations, string authorization = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.RemovePulseSettingsWithHttpMessagesAsync(authorization, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Returns pivot settings.
+            /// </summary>
+            /// <remarks>
+            /// The **pivot settings** used for store pivot configuration.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static object GetPivotSettings(this ISiSenseSDK operations)
+            {
+                return operations.GetPivotSettingsAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Returns pivot settings.
+            /// </summary>
+            /// <remarks>
+            /// The **pivot settings** used for store pivot configuration.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetPivotSettingsAsync(this ISiSenseSDK operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetPivotSettingsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Patch pivot settions.
+            /// </summary>
+            /// <remarks>
+            /// The **pivot settings** used for store pivot configuration.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='pivot'>
+            /// Object with the pivot settings.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            public static object PatchPivotSettings(this ISiSenseSDK operations, Pivot pivot, string authorization = default(string))
+            {
+                return operations.PatchPivotSettingsAsync(pivot, authorization).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Patch pivot settions.
+            /// </summary>
+            /// <remarks>
+            /// The **pivot settings** used for store pivot configuration.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='pivot'>
+            /// Object with the pivot settings.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> PatchPivotSettingsAsync(this ISiSenseSDK operations, Pivot pivot, string authorization = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.PatchPivotSettingsWithHttpMessagesAsync(pivot, authorization, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Return a language file
+            /// </summary>
+            /// <remarks>
+            /// The **get translations/lang** endpoint returns a language file.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='lang'>
+            /// The name of the language to be returned.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            public static object GetLang(this ISiSenseSDK operations, string lang, string authorization = default(string))
+            {
+                return operations.GetLangAsync(lang, authorization).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Return a language file
+            /// </summary>
+            /// <remarks>
+            /// The **get translations/lang** endpoint returns a language file.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='lang'>
+            /// The name of the language to be returned.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetLangAsync(this ISiSenseSDK operations, string lang, string authorization = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetLangWithHttpMessagesAsync(lang, authorization, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Return a language file
+            /// </summary>
+            /// <remarks>
+            /// The **get translations/lang** endpoint returns a language file for Sisense
+            /// shared components.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='lang'>
+            /// The name of the language to be returned.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            public static object GetIntlLang(this ISiSenseSDK operations, string lang, string authorization = default(string))
+            {
+                return operations.GetIntlLangAsync(lang, authorization).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Return a language file
+            /// </summary>
+            /// <remarks>
+            /// The **get translations/lang** endpoint returns a language file for Sisense
+            /// shared components.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='lang'>
+            /// The name of the language to be returned.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetIntlLangAsync(this ISiSenseSDK operations, string lang, string authorization = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetIntlLangWithHttpMessagesAsync(lang, authorization, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Return all supported languages
+            /// </summary>
+            /// <remarks>
+            /// The **get translations** endpoint returns a list of all your supported
+            /// languages in Sisense.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            public static object GetAllLangs(this ISiSenseSDK operations, string authorization = default(string))
+            {
+                return operations.GetAllLangsAsync(authorization).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Return all supported languages
+            /// </summary>
+            /// <remarks>
+            /// The **get translations** endpoint returns a list of all your supported
+            /// languages in Sisense.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetAllLangsAsync(this ISiSenseSDK operations, string authorization = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetAllLangsWithHttpMessagesAsync(authorization, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Returns Login Lockout settings.
+            /// </summary>
+            /// <remarks>
+            /// Get current settings for user lockout on failed login attempts
+            ///
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static object Get(this ISiSenseSDK operations)
+            {
+                return operations.GetAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Returns Login Lockout settings.
+            /// </summary>
+            /// <remarks>
+            /// Get current settings for user lockout on failed login attempts
+            ///
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetAsync(this ISiSenseSDK operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Updates Login Lockout settings.
+            /// </summary>
+            /// <remarks>
+            /// Update settings for user lockout on failed login attempts
+            ///
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='loginLockoutSettings'>
+            /// Object with the Login Lockout settings.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            public static object UpdateLockoutUsingPatch(this ISiSenseSDK operations, LoginLockoutSettings loginLockoutSettings, string authorization = default(string))
+            {
+                return operations.UpdateLockoutUsingPatchAsync(loginLockoutSettings, authorization).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Updates Login Lockout settings.
+            /// </summary>
+            /// <remarks>
+            /// Update settings for user lockout on failed login attempts
+            ///
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='loginLockoutSettings'>
+            /// Object with the Login Lockout settings.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> UpdateLockoutUsingPatchAsync(this ISiSenseSDK operations, LoginLockoutSettings loginLockoutSettings, string authorization = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.UpdateLockoutUsingPatchWithHttpMessagesAsync(loginLockoutSettings, authorization, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// Get Ecm Model of a specific elasticube
             /// </summary>
             /// <param name='operations'>

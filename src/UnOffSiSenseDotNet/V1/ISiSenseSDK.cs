@@ -347,6 +347,522 @@ namespace UnOffSiSenseDotNet.V1
         Task<HttpOperationResponse<object>> LoggerWithHttpMessagesAsync(string path, object body, string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Analyze card structure
+        /// </summary>
+        /// <remarks>
+        /// Analyze the types of elements and actions being used within the
+        /// card
+        /// </remarks>
+        /// <param name='path'>
+        /// The path of the cards to get
+        /// </param>
+        /// <param name='body'>
+        /// Basic cards object (in `JSON` notation) to be analyzed
+        /// </param>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space
+        /// between it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> CardAnalysisWithHttpMessagesAsync(string path, object body, string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Return email server settings
+        /// </summary>
+        /// <remarks>
+        /// The **email server settings** used for Email Server settings
+        /// managing.
+        ///
+        /// </remarks>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetEmailServerWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Add email server settings
+        /// </summary>
+        /// <remarks>
+        /// The **email server settings** used for Email Server settings
+        /// managing.
+        ///
+        /// </remarks>
+        /// <param name='emailServer'>
+        /// Object with the settings of email server
+        /// </param>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space
+        /// between it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<AddEmailServerOKResponse>> AddEmailServerWithHttpMessagesAsync(EmailServer emailServer, string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Update email server settings
+        /// </summary>
+        /// <remarks>
+        /// The **email server settings** used for Email Server settings
+        /// managing.
+        ///
+        /// </remarks>
+        /// <param name='emailServer'>
+        /// Object with the settings of email server
+        /// </param>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space
+        /// between it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<UpdateEmailServerOKResponse>> UpdateEmailServerWithHttpMessagesAsync(EmailServerModel emailServer, string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Delete email server settings
+        /// </summary>
+        /// <remarks>
+        /// The **email server settings** used for Email Server settings
+        /// managing.
+        ///
+        /// </remarks>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse> DeleteEmailServerWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Return public configuration settings
+        /// </summary>
+        /// <remarks>
+        /// The **Public Configuration** used for getting public system
+        /// settings.
+        ///
+        /// </remarks>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<GetPublicSettingsOKResponse>> GetPublicSettingsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Returns sso settings.
+        /// </summary>
+        /// <remarks>
+        /// The **sso settings** used for single sign on configuration.
+        /// </remarks>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetSsoSettingsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Set sso settings.
+        /// </summary>
+        /// <remarks>
+        /// The **sso settings** used for single sign on configuration.
+        /// </remarks>
+        /// <param name='sso'>
+        /// Object with the sso settings.
+        /// </param>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space
+        /// between it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> SetSsoSettingsWithHttpMessagesAsync(Sso sso, string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Returns system configuration settings.
+        /// </summary>
+        /// <remarks>
+        /// The **system settings** used for system settings configuration.
+        ///
+        /// </remarks>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetSystemSettingsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Adds or updates system settings.
+        /// </summary>
+        /// <remarks>
+        /// The **system settings** used for system settings configuration.
+        ///
+        /// </remarks>
+        /// <param name='emailServer'>
+        /// Object with the system settings.
+        /// </param>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space
+        /// between it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> SetSystemSettingsWithHttpMessagesAsync(EmailServerModelModel emailServer, string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Returns globalization settings
+        /// </summary>
+        /// <remarks>
+        /// Returns locale settings, including the set locale, and whether
+        /// autodetect is enabled.
+        /// </remarks>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space
+        /// between it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetGlobalizationWithHttpMessagesAsync(string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Add globalization settings
+        /// </summary>
+        /// <remarks>
+        /// You can change the locale or select whether the localization
+        /// selection is automatically detected or not.
+        /// </remarks>
+        /// <param name='globalization'>
+        /// Object with the globalization settings.
+        /// </param>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space
+        /// between it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> AddWithHttpMessagesAsync(Globalization globalization, string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Update globalization settings
+        /// </summary>
+        /// <remarks>
+        /// You can update the locale or select whether the localization
+        /// selection is automatically detected or not.
+        /// </remarks>
+        /// <param name='globalization'>
+        /// Object with the globalization settings.
+        /// </param>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space
+        /// between it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> UpdateWithHttpMessagesAsync(Globalization globalization, string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Delete globalization settings
+        /// </summary>
+        /// <remarks>
+        /// Deletes globalization settings in your server.
+        /// </remarks>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space
+        /// between it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> RemoveGlobalizationWithHttpMessagesAsync(string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Returns translation settings
+        /// </summary>
+        /// <remarks>
+        /// Returns all the settings for the translation service
+        /// </remarks>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space
+        /// between it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetTranslationWithHttpMessagesAsync(string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Returns pulse settings.
+        /// </summary>
+        /// <remarks>
+        /// The **pulse settings** used for store pulse page configuration.
+        /// </remarks>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetPulseSettingsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Set pulse settings.
+        /// </summary>
+        /// <remarks>
+        /// The **pulse settings** used for store pulse page configuration.
+        /// </remarks>
+        /// <param name='pulse'>
+        /// Object with the pulse settings.
+        /// </param>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space
+        /// between it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> SetPulseSettingsWithHttpMessagesAsync(Pulse pulse, string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Patch pulse settings.
+        /// </summary>
+        /// <remarks>
+        /// The **pulse settings** used for store pulse page configuration.
+        /// </remarks>
+        /// <param name='pulse'>
+        /// Object with the pulse settings.
+        /// </param>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space
+        /// between it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> PatchWithHttpMessagesAsync(Pulse pulse, string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Delete pulse settings.
+        /// </summary>
+        /// <remarks>
+        /// The **pulse settings** used for store pulse page configuration.
+        /// </remarks>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space
+        /// between it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> RemovePulseSettingsWithHttpMessagesAsync(string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Returns pivot settings.
+        /// </summary>
+        /// <remarks>
+        /// The **pivot settings** used for store pivot configuration.
+        /// </remarks>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetPivotSettingsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Patch pivot settions.
+        /// </summary>
+        /// <remarks>
+        /// The **pivot settings** used for store pivot configuration.
+        /// </remarks>
+        /// <param name='pivot'>
+        /// Object with the pivot settings.
+        /// </param>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space
+        /// between it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> PatchPivotSettingsWithHttpMessagesAsync(Pivot pivot, string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Return a language file
+        /// </summary>
+        /// <remarks>
+        /// The **get translations/lang** endpoint returns a language file.
+        /// </remarks>
+        /// <param name='lang'>
+        /// The name of the language to be returned.
+        /// </param>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space
+        /// between it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetLangWithHttpMessagesAsync(string lang, string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Return a language file
+        /// </summary>
+        /// <remarks>
+        /// The **get translations/lang** endpoint returns a language file for
+        /// Sisense shared components.
+        /// </remarks>
+        /// <param name='lang'>
+        /// The name of the language to be returned.
+        /// </param>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space
+        /// between it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetIntlLangWithHttpMessagesAsync(string lang, string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Return all supported languages
+        /// </summary>
+        /// <remarks>
+        /// The **get translations** endpoint returns a list of all your
+        /// supported languages in Sisense.
+        /// </remarks>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space
+        /// between it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetAllLangsWithHttpMessagesAsync(string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Returns Login Lockout settings.
+        /// </summary>
+        /// <remarks>
+        /// Get current settings for user lockout on failed login attempts
+        ///
+        /// </remarks>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Updates Login Lockout settings.
+        /// </summary>
+        /// <remarks>
+        /// Update settings for user lockout on failed login attempts
+        ///
+        /// </remarks>
+        /// <param name='loginLockoutSettings'>
+        /// Object with the Login Lockout settings.
+        /// </param>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space
+        /// between it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> UpdateLockoutUsingPatchWithHttpMessagesAsync(LoginLockoutSettings loginLockoutSettings, string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
         /// Get Ecm Model of a specific elasticube
         /// </summary>
         /// <param name='cubeTitle'>
