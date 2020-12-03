@@ -1104,5 +1104,75 @@ namespace UnOffSiSenseDotNet.V1
         /// </param>
         Task<HttpOperationResponse<AddServerAccessBadRequestResponse>> AddServerAccessWithHttpMessagesAsync(ServerAccess serverAccess, string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Get a user's dashboards
+        /// </summary>
+        /// <remarks>
+        /// The **get dashboards** endpoint provides access to a specified
+        /// user's dashboards in their stored format as `JSON` objects.
+        /// &lt;br/&gt;It's results can be filtered by parameters such as
+        /// dashboard name, parent folder, or datasource.
+        /// &lt;br/&gt;&lt;br/&gt;The expandable fields for the dashboard
+        /// object are `widgets`, `parentFolder`, `userAuth`, `rule` and
+        /// `owner`.
+        ///
+        /// </remarks>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space
+        /// between it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='parentFolder'>
+        /// Parent folder ID to filter by
+        /// </param>
+        /// <param name='name'>
+        /// Name to filter by
+        /// </param>
+        /// <param name='datasourceTitle'>
+        /// Datasource name to filter by
+        /// </param>
+        /// <param name='datasourceAddress'>
+        /// Datasource address to filter by
+        /// </param>
+        /// <param name='fields'>
+        /// Whitelist of fields to return for each document. fields Can also
+        /// define which fields to exclude by prefixing field names with `-`
+        /// </param>
+        /// <param name='expand'>
+        /// List of fields that should be expanded (substitures their IDs with
+        /// actual objects). May be nested using the `resource.subResource`
+        /// format
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<IList<GetOwnedDashboardsOKResponseItem>>> GetOwnedDashboardsWithHttpMessagesAsync(string authorization = default(string), string parentFolder = default(string), string name = default(string), string datasourceTitle = default(string), string datasourceAddress = default(string), string fields = default(string), string expand = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Add a new dashboard
+        /// </summary>
+        /// <remarks>
+        /// The **add dashboard** endpoint reveives a dashboard object and adds
+        /// it to the user's dashboards.
+        /// </remarks>
+        /// <param name='dashboard'>
+        /// Basic dashboard object to be added
+        /// </param>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space
+        /// between it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<AddDashboardCreatedResponse>> AddDashboardWithHttpMessagesAsync(DashboardModel dashboard, string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
     }
 }

@@ -2328,5 +2328,153 @@ namespace UnOffSiSenseDotNet.V1
                 }
             }
 
+            /// <summary>
+            /// Get a user's dashboards
+            /// </summary>
+            /// <remarks>
+            /// The **get dashboards** endpoint provides access to a specified user's
+            /// dashboards in their stored format as `JSON` objects.
+            /// &lt;br/&gt;It's results can be filtered by parameters such as dashboard
+            /// name, parent folder, or datasource.
+            /// &lt;br/&gt;&lt;br/&gt;The expandable fields for the dashboard object are
+            /// `widgets`, `parentFolder`, `userAuth`, `rule` and `owner`.
+            ///
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            /// <param name='parentFolder'>
+            /// Parent folder ID to filter by
+            /// </param>
+            /// <param name='name'>
+            /// Name to filter by
+            /// </param>
+            /// <param name='datasourceTitle'>
+            /// Datasource name to filter by
+            /// </param>
+            /// <param name='datasourceAddress'>
+            /// Datasource address to filter by
+            /// </param>
+            /// <param name='fields'>
+            /// Whitelist of fields to return for each document. fields Can also define
+            /// which fields to exclude by prefixing field names with `-`
+            /// </param>
+            /// <param name='expand'>
+            /// List of fields that should be expanded (substitures their IDs with actual
+            /// objects). May be nested using the `resource.subResource` format
+            /// </param>
+            public static IList<GetOwnedDashboardsOKResponseItem> GetOwnedDashboards(this ISiSenseSDK operations, string authorization = default(string), string parentFolder = default(string), string name = default(string), string datasourceTitle = default(string), string datasourceAddress = default(string), string fields = default(string), string expand = default(string))
+            {
+                return operations.GetOwnedDashboardsAsync(authorization, parentFolder, name, datasourceTitle, datasourceAddress, fields, expand).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get a user's dashboards
+            /// </summary>
+            /// <remarks>
+            /// The **get dashboards** endpoint provides access to a specified user's
+            /// dashboards in their stored format as `JSON` objects.
+            /// &lt;br/&gt;It's results can be filtered by parameters such as dashboard
+            /// name, parent folder, or datasource.
+            /// &lt;br/&gt;&lt;br/&gt;The expandable fields for the dashboard object are
+            /// `widgets`, `parentFolder`, `userAuth`, `rule` and `owner`.
+            ///
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            /// <param name='parentFolder'>
+            /// Parent folder ID to filter by
+            /// </param>
+            /// <param name='name'>
+            /// Name to filter by
+            /// </param>
+            /// <param name='datasourceTitle'>
+            /// Datasource name to filter by
+            /// </param>
+            /// <param name='datasourceAddress'>
+            /// Datasource address to filter by
+            /// </param>
+            /// <param name='fields'>
+            /// Whitelist of fields to return for each document. fields Can also define
+            /// which fields to exclude by prefixing field names with `-`
+            /// </param>
+            /// <param name='expand'>
+            /// List of fields that should be expanded (substitures their IDs with actual
+            /// objects). May be nested using the `resource.subResource` format
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IList<GetOwnedDashboardsOKResponseItem>> GetOwnedDashboardsAsync(this ISiSenseSDK operations, string authorization = default(string), string parentFolder = default(string), string name = default(string), string datasourceTitle = default(string), string datasourceAddress = default(string), string fields = default(string), string expand = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetOwnedDashboardsWithHttpMessagesAsync(authorization, parentFolder, name, datasourceTitle, datasourceAddress, fields, expand, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Add a new dashboard
+            /// </summary>
+            /// <remarks>
+            /// The **add dashboard** endpoint reveives a dashboard object and adds it to
+            /// the user's dashboards.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='dashboard'>
+            /// Basic dashboard object to be added
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            public static AddDashboardCreatedResponse AddDashboard(this ISiSenseSDK operations, DashboardModel dashboard, string authorization = default(string))
+            {
+                return operations.AddDashboardAsync(dashboard, authorization).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Add a new dashboard
+            /// </summary>
+            /// <remarks>
+            /// The **add dashboard** endpoint reveives a dashboard object and adds it to
+            /// the user's dashboards.
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='dashboard'>
+            /// Basic dashboard object to be added
+            /// </param>
+            /// <param name='authorization'>
+            /// The user's API token preceded by the keyword `Bearer ` (with space between
+            /// it and the token). For more information, see [API
+            /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<AddDashboardCreatedResponse> AddDashboardAsync(this ISiSenseSDK operations, DashboardModel dashboard, string authorization = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.AddDashboardWithHttpMessagesAsync(dashboard, authorization, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
     }
 }

@@ -1,45 +1,26 @@
 using FakeItEasy;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
-using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 using UnOffSiSenseDotNet.V1;
-using UnOffSiSenseDotNet.V1.Models;
 using Xunit;
 
 namespace UnOffSiSenseDotNet.test.V1
 {
     public class SiSenseSDKTests
     {
-        private SiSenseConfiguration configuration;
         private HttpClient fakeHttpClient;
 
         public SiSenseSDKTests()
         {
-            Assembly TestAssembly;
-            // Instantiate a target object.
-            SiSenseConfiguration Config1 = new SiSenseConfiguration();
-            Type Type1;
-            // Set the Type instance to the target class type.
-            Type1 = Config1.GetType();
-            // Instantiate an Assembly class to the assembly housing the Integer type.
-            TestAssembly = Assembly.GetAssembly(Config1.GetType());
-            // Display the physical location of the assembly containing the manifest.
-            Console.WriteLine("Location=" + TestAssembly.Location);
-            var dirPath = Path.GetDirectoryName(TestAssembly.Location);
-            configuration = TestHelper.GetApplicationConfiguration(dirPath);
-
             this.fakeHttpClient = A.Fake<HttpClient>();
-
         }
 
         private SiSenseSDK CreateSiSenseSDK()
         {
             return new SiSenseSDK(
-                this.fakeHttpClient, true);
+                this.fakeHttpClient,
+                TODO);
         }
 
         [Fact]
@@ -48,7 +29,7 @@ namespace UnOffSiSenseDotNet.test.V1
             // Arrange
             var siSenseSDK = this.CreateSiSenseSDK();
             ReportObjectModel reportObject = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -68,7 +49,7 @@ namespace UnOffSiSenseDotNet.test.V1
             var siSenseSDK = this.CreateSiSenseSDK();
             string path = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -90,7 +71,7 @@ namespace UnOffSiSenseDotNet.test.V1
             string path = null;
             object body = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -113,7 +94,7 @@ namespace UnOffSiSenseDotNet.test.V1
             string path = null;
             string authorization = null;
             string snippetType = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -135,7 +116,7 @@ namespace UnOffSiSenseDotNet.test.V1
             var siSenseSDK = this.CreateSiSenseSDK();
             string path = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -157,7 +138,7 @@ namespace UnOffSiSenseDotNet.test.V1
             string path = null;
             object body = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -180,7 +161,7 @@ namespace UnOffSiSenseDotNet.test.V1
             string path = null;
             object body = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -203,7 +184,7 @@ namespace UnOffSiSenseDotNet.test.V1
             string path = null;
             object body = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -226,7 +207,7 @@ namespace UnOffSiSenseDotNet.test.V1
             string path = null;
             object body = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -249,7 +230,7 @@ namespace UnOffSiSenseDotNet.test.V1
             string path = null;
             object body = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -272,7 +253,7 @@ namespace UnOffSiSenseDotNet.test.V1
             string path = null;
             object body = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -295,7 +276,7 @@ namespace UnOffSiSenseDotNet.test.V1
             string path = null;
             object body = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -315,7 +296,7 @@ namespace UnOffSiSenseDotNet.test.V1
         {
             // Arrange
             var siSenseSDK = this.CreateSiSenseSDK();
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -334,7 +315,7 @@ namespace UnOffSiSenseDotNet.test.V1
             var siSenseSDK = this.CreateSiSenseSDK();
             EmailServer emailServer = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -355,7 +336,7 @@ namespace UnOffSiSenseDotNet.test.V1
             var siSenseSDK = this.CreateSiSenseSDK();
             EmailServerModel emailServer = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -374,7 +355,7 @@ namespace UnOffSiSenseDotNet.test.V1
         {
             // Arrange
             var siSenseSDK = this.CreateSiSenseSDK();
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -391,7 +372,7 @@ namespace UnOffSiSenseDotNet.test.V1
         {
             // Arrange
             var siSenseSDK = this.CreateSiSenseSDK();
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -408,7 +389,7 @@ namespace UnOffSiSenseDotNet.test.V1
         {
             // Arrange
             var siSenseSDK = this.CreateSiSenseSDK();
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -427,7 +408,7 @@ namespace UnOffSiSenseDotNet.test.V1
             var siSenseSDK = this.CreateSiSenseSDK();
             Sso sso = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -446,7 +427,7 @@ namespace UnOffSiSenseDotNet.test.V1
         {
             // Arrange
             var siSenseSDK = this.CreateSiSenseSDK();
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -465,7 +446,7 @@ namespace UnOffSiSenseDotNet.test.V1
             var siSenseSDK = this.CreateSiSenseSDK();
             EmailServerModelModel emailServer = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -485,7 +466,7 @@ namespace UnOffSiSenseDotNet.test.V1
             // Arrange
             var siSenseSDK = this.CreateSiSenseSDK();
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -505,7 +486,7 @@ namespace UnOffSiSenseDotNet.test.V1
             var siSenseSDK = this.CreateSiSenseSDK();
             Globalization globalization = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -526,7 +507,7 @@ namespace UnOffSiSenseDotNet.test.V1
             var siSenseSDK = this.CreateSiSenseSDK();
             Globalization globalization = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -546,7 +527,7 @@ namespace UnOffSiSenseDotNet.test.V1
             // Arrange
             var siSenseSDK = this.CreateSiSenseSDK();
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -565,7 +546,7 @@ namespace UnOffSiSenseDotNet.test.V1
             // Arrange
             var siSenseSDK = this.CreateSiSenseSDK();
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -583,7 +564,7 @@ namespace UnOffSiSenseDotNet.test.V1
         {
             // Arrange
             var siSenseSDK = this.CreateSiSenseSDK();
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -602,7 +583,7 @@ namespace UnOffSiSenseDotNet.test.V1
             var siSenseSDK = this.CreateSiSenseSDK();
             Pulse pulse = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -623,7 +604,7 @@ namespace UnOffSiSenseDotNet.test.V1
             var siSenseSDK = this.CreateSiSenseSDK();
             Pulse pulse = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -643,7 +624,7 @@ namespace UnOffSiSenseDotNet.test.V1
             // Arrange
             var siSenseSDK = this.CreateSiSenseSDK();
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -661,7 +642,7 @@ namespace UnOffSiSenseDotNet.test.V1
         {
             // Arrange
             var siSenseSDK = this.CreateSiSenseSDK();
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -680,7 +661,7 @@ namespace UnOffSiSenseDotNet.test.V1
             var siSenseSDK = this.CreateSiSenseSDK();
             Pivot pivot = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -701,7 +682,7 @@ namespace UnOffSiSenseDotNet.test.V1
             var siSenseSDK = this.CreateSiSenseSDK();
             string lang = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -722,7 +703,7 @@ namespace UnOffSiSenseDotNet.test.V1
             var siSenseSDK = this.CreateSiSenseSDK();
             string lang = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -742,7 +723,7 @@ namespace UnOffSiSenseDotNet.test.V1
             // Arrange
             var siSenseSDK = this.CreateSiSenseSDK();
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -760,7 +741,7 @@ namespace UnOffSiSenseDotNet.test.V1
         {
             // Arrange
             var siSenseSDK = this.CreateSiSenseSDK();
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -779,7 +760,7 @@ namespace UnOffSiSenseDotNet.test.V1
             var siSenseSDK = this.CreateSiSenseSDK();
             LoginLockoutSettings loginLockoutSettings = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -800,7 +781,7 @@ namespace UnOffSiSenseDotNet.test.V1
             var siSenseSDK = this.CreateSiSenseSDK();
             string cubeTitle = null;
             string server = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -823,7 +804,7 @@ namespace UnOffSiSenseDotNet.test.V1
             string password = null;
             string xDeviceId = null;
             string localeId = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -847,7 +828,7 @@ namespace UnOffSiSenseDotNet.test.V1
             string xDeviceId = null;
             string authorization = null;
             string targetDevice = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -869,7 +850,7 @@ namespace UnOffSiSenseDotNet.test.V1
             var siSenseSDK = this.CreateSiSenseSDK();
             string xDeviceId = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -891,7 +872,7 @@ namespace UnOffSiSenseDotNet.test.V1
             string xDeviceId = null;
             string authorization = null;
             object empty = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -911,10 +892,10 @@ namespace UnOffSiSenseDotNet.test.V1
         {
             // Arrange
             var siSenseSDK = this.CreateSiSenseSDK();
-            IList<string> users = null;
+            IList users = null;
             string xDeviceId = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -935,9 +916,9 @@ namespace UnOffSiSenseDotNet.test.V1
             // Arrange
             var siSenseSDK = this.CreateSiSenseSDK();
             string tokenType = null;
-            IList<string> users = null;
+            IList users = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -959,7 +940,7 @@ namespace UnOffSiSenseDotNet.test.V1
             var siSenseSDK = this.CreateSiSenseSDK();
             string relayState = null;
             string sAMLResponse = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -979,7 +960,7 @@ namespace UnOffSiSenseDotNet.test.V1
             // Arrange
             var siSenseSDK = this.CreateSiSenseSDK();
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -999,7 +980,7 @@ namespace UnOffSiSenseDotNet.test.V1
             var siSenseSDK = this.CreateSiSenseSDK();
             ServerAccess serverAccess = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -1025,7 +1006,7 @@ namespace UnOffSiSenseDotNet.test.V1
             string datasourceAddress = null;
             string fields = null;
             string expand = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
@@ -1051,7 +1032,7 @@ namespace UnOffSiSenseDotNet.test.V1
             var siSenseSDK = this.CreateSiSenseSDK();
             DashboardModel dashboard = null;
             string authorization = null;
-            Dictionary<string, List<string>> customHeaders = null;
+            Dictionary customHeaders = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act

@@ -1,78 +1,35 @@
 using FakeItEasy;
-using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 using UnOffSiSenseDotNet.V1;
-using UnOffSiSenseDotNet.V1.Models;
 using Xunit;
 
 namespace UnOffSiSenseDotNet.test.V1
 {
     public class SiSenseSDKExtensionsTests
     {
-        private string authorization;
 
-        public string Authorization
-        {
-            get {
-                if(!string.IsNullOrEmpty(authorization))
-                {
-                    return authorization;
-                }
-                System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient();
-                httpClient.BaseAddress = new Uri(configuration.BaseUrl);
-                //ISiSenseSDK operations = new SiSenseSDK(httpClient, true);
-                ISiSenseSDK operations = new SiSenseSDK(new Uri(configuration.BaseUrl));
-                string username = configuration.Username;
-                string password = configuration.Password;
-                string xDeviceId = null;
-                string localeId = null;
-
-                var result = (LoginOKResponse)SiSenseSDKExtensions.Login(
-                    operations,
-                    username,
-                    password,
-                    xDeviceId,
-                    localeId);
-
-                authorization = "Bearer " + result.AccessToken;
-
-                return authorization;
-            }
-            set { authorization = value; }
-        }
-
-       private SiSenseConfiguration configuration;
 
         public SiSenseSDKExtensionsTests()
         {
-            Assembly TestAssembly;
-            // Instantiate a target object.
-            SiSenseConfiguration Config1 = new SiSenseConfiguration();
-            Type Type1;
-            // Set the Type instance to the target class type.
-            Type1 = Config1.GetType();
-            // Instantiate an Assembly class to the assembly housing the Integer type.
-            TestAssembly = Assembly.GetAssembly(Config1.GetType());
-            // Display the physical location of the assembly containing the manifest.
-            Console.WriteLine("Location=" + TestAssembly.Location);
-            var dirPath = Path.GetDirectoryName(TestAssembly.Location);
-            configuration = TestHelper.GetApplicationConfiguration(dirPath);
+
+        }
+
+        private SiSenseSDKExtensions CreateSiSenseSDKExtensions()
+        {
+            return new SiSenseSDKExtensions();
         }
 
         [Fact]
         public void SendReports_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             ReportObjectModel reportObject = null;
 
             // Act
-            var result = SiSenseSDKExtensions.SendReports(
+            var result = siSenseSDKExtensions.SendReports(
                 operations,
                 reportObject);
 
@@ -84,12 +41,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task SendReportsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             ReportObjectModel reportObject = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.SendReportsAsync(
+            var result = await siSenseSDKExtensions.SendReportsAsync(
                 operations,
                 reportObject,
                 cancellationToken);
@@ -102,12 +60,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetCardsNames_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.GetCardsNames(
+            var result = siSenseSDKExtensions.GetCardsNames(
                 operations,
                 path,
                 authorization);
@@ -120,14 +79,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetCardsNamesAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.GetCardsNamesAsync(
+            var result = await siSenseSDKExtensions.GetCardsNamesAsync(
                 operations,
                 path,
                 authorization,
@@ -141,14 +100,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetCardByName_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.GetCardByName(
+            var result = siSenseSDKExtensions.GetCardByName(
                 operations,
                 path,
                 body,
@@ -162,7 +121,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetCardByNameAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -170,7 +129,7 @@ namespace UnOffSiSenseDotNet.test.V1
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.GetCardByNameAsync(
+            var result = await siSenseSDKExtensions.GetCardByNameAsync(
                 operations,
                 path,
                 body,
@@ -185,14 +144,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetSnippets_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             string authorization = null;
             string snippetType = null;
 
             // Act
-            var result = SiSenseSDKExtensions.GetSnippets(
+            var result = siSenseSDKExtensions.GetSnippets(
                 operations,
                 path,
                 authorization,
@@ -206,7 +165,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetSnippetsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             string authorization = null;
@@ -214,7 +173,7 @@ namespace UnOffSiSenseDotNet.test.V1
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.GetSnippetsAsync(
+            var result = await siSenseSDKExtensions.GetSnippetsAsync(
                 operations,
                 path,
                 authorization,
@@ -229,13 +188,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetCustomActions_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.GetCustomActions(
+            var result = siSenseSDKExtensions.GetCustomActions(
                 operations,
                 path,
                 authorization);
@@ -248,14 +207,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetCustomActionsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.GetCustomActionsAsync(
+            var result = await siSenseSDKExtensions.GetCustomActionsAsync(
                 operations,
                 path,
                 authorization,
@@ -269,14 +228,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetActionByType_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.GetActionByType(
+            var result = siSenseSDKExtensions.GetActionByType(
                 operations,
                 path,
                 body,
@@ -290,7 +249,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetActionByTypeAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -298,7 +257,7 @@ namespace UnOffSiSenseDotNet.test.V1
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.GetActionByTypeAsync(
+            var result = await siSenseSDKExtensions.GetActionByTypeAsync(
                 operations,
                 path,
                 body,
@@ -313,14 +272,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public void SaveNewTamplate_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.SaveNewTamplate(
+            var result = siSenseSDKExtensions.SaveNewTamplate(
                 operations,
                 path,
                 body,
@@ -334,7 +293,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task SaveNewTamplateAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -342,7 +301,7 @@ namespace UnOffSiSenseDotNet.test.V1
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.SaveNewTamplateAsync(
+            var result = await siSenseSDKExtensions.SaveNewTamplateAsync(
                 operations,
                 path,
                 body,
@@ -357,14 +316,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public void SaveCustomAction_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.SaveCustomAction(
+            var result = siSenseSDKExtensions.SaveCustomAction(
                 operations,
                 path,
                 body,
@@ -378,7 +337,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task SaveCustomActionAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -386,7 +345,7 @@ namespace UnOffSiSenseDotNet.test.V1
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.SaveCustomActionAsync(
+            var result = await siSenseSDKExtensions.SaveCustomActionAsync(
                 operations,
                 path,
                 body,
@@ -401,14 +360,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public void DeleteCard_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.DeleteCard(
+            var result = siSenseSDKExtensions.DeleteCard(
                 operations,
                 path,
                 body,
@@ -422,7 +381,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task DeleteCardAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -430,7 +389,7 @@ namespace UnOffSiSenseDotNet.test.V1
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.DeleteCardAsync(
+            var result = await siSenseSDKExtensions.DeleteCardAsync(
                 operations,
                 path,
                 body,
@@ -445,14 +404,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public void DeleteCustomAction_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.DeleteCustomAction(
+            var result = siSenseSDKExtensions.DeleteCustomAction(
                 operations,
                 path,
                 body,
@@ -466,7 +425,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task DeleteCustomActionAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -474,7 +433,7 @@ namespace UnOffSiSenseDotNet.test.V1
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.DeleteCustomActionAsync(
+            var result = await siSenseSDKExtensions.DeleteCustomActionAsync(
                 operations,
                 path,
                 body,
@@ -489,14 +448,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public void Logger_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.Logger(
+            var result = siSenseSDKExtensions.Logger(
                 operations,
                 path,
                 body,
@@ -510,7 +469,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task LoggerAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -518,7 +477,7 @@ namespace UnOffSiSenseDotNet.test.V1
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.LoggerAsync(
+            var result = await siSenseSDKExtensions.LoggerAsync(
                 operations,
                 path,
                 body,
@@ -533,14 +492,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public void CardAnalysis_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.CardAnalysis(
+            var result = siSenseSDKExtensions.CardAnalysis(
                 operations,
                 path,
                 body,
@@ -554,7 +513,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task CardAnalysisAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -562,7 +521,7 @@ namespace UnOffSiSenseDotNet.test.V1
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.CardAnalysisAsync(
+            var result = await siSenseSDKExtensions.CardAnalysisAsync(
                 operations,
                 path,
                 body,
@@ -577,11 +536,11 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetEmailServer_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
 
             // Act
-            var result = SiSenseSDKExtensions.GetEmailServer(
+            var result = siSenseSDKExtensions.GetEmailServer(
                 operations);
 
             // Assert
@@ -592,12 +551,12 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetEmailServerAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.GetEmailServerAsync(
+            var result = await siSenseSDKExtensions.GetEmailServerAsync(
                 operations,
                 cancellationToken);
 
@@ -609,13 +568,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public void AddEmailServer_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             EmailServer emailServer = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.AddEmailServer(
+            var result = siSenseSDKExtensions.AddEmailServer(
                 operations,
                 emailServer,
                 authorization);
@@ -628,14 +587,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task AddEmailServerAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             EmailServer emailServer = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.AddEmailServerAsync(
+            var result = await siSenseSDKExtensions.AddEmailServerAsync(
                 operations,
                 emailServer,
                 authorization,
@@ -649,13 +608,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public void UpdateEmailServer_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             EmailServerModel emailServer = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.UpdateEmailServer(
+            var result = siSenseSDKExtensions.UpdateEmailServer(
                 operations,
                 emailServer,
                 authorization);
@@ -668,14 +627,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task UpdateEmailServerAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             EmailServerModel emailServer = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.UpdateEmailServerAsync(
+            var result = await siSenseSDKExtensions.UpdateEmailServerAsync(
                 operations,
                 emailServer,
                 authorization,
@@ -689,11 +648,11 @@ namespace UnOffSiSenseDotNet.test.V1
         public void DeleteEmailServer_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
 
             // Act
-            SiSenseSDKExtensions.DeleteEmailServer(
+            siSenseSDKExtensions.DeleteEmailServer(
                 operations);
 
             // Assert
@@ -704,12 +663,12 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task DeleteEmailServerAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            await SiSenseSDKExtensions.DeleteEmailServerAsync(
+            await siSenseSDKExtensions.DeleteEmailServerAsync(
                 operations,
                 cancellationToken);
 
@@ -721,11 +680,11 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetPublicSettings_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
 
             // Act
-            var result = SiSenseSDKExtensions.GetPublicSettings(
+            var result = siSenseSDKExtensions.GetPublicSettings(
                 operations);
 
             // Assert
@@ -736,12 +695,12 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetPublicSettingsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.GetPublicSettingsAsync(
+            var result = await siSenseSDKExtensions.GetPublicSettingsAsync(
                 operations,
                 cancellationToken);
 
@@ -753,11 +712,11 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetSsoSettings_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
 
             // Act
-            var result = SiSenseSDKExtensions.GetSsoSettings(
+            var result = siSenseSDKExtensions.GetSsoSettings(
                 operations);
 
             // Assert
@@ -768,12 +727,12 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetSsoSettingsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.GetSsoSettingsAsync(
+            var result = await siSenseSDKExtensions.GetSsoSettingsAsync(
                 operations,
                 cancellationToken);
 
@@ -785,13 +744,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public void SetSsoSettings_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             Sso sso = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.SetSsoSettings(
+            var result = siSenseSDKExtensions.SetSsoSettings(
                 operations,
                 sso,
                 authorization);
@@ -804,14 +763,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task SetSsoSettingsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             Sso sso = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.SetSsoSettingsAsync(
+            var result = await siSenseSDKExtensions.SetSsoSettingsAsync(
                 operations,
                 sso,
                 authorization,
@@ -825,11 +784,11 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetSystemSettings_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
 
             // Act
-            var result = SiSenseSDKExtensions.GetSystemSettings(
+            var result = siSenseSDKExtensions.GetSystemSettings(
                 operations);
 
             // Assert
@@ -840,12 +799,12 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetSystemSettingsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.GetSystemSettingsAsync(
+            var result = await siSenseSDKExtensions.GetSystemSettingsAsync(
                 operations,
                 cancellationToken);
 
@@ -857,13 +816,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public void SetSystemSettings_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             EmailServerModelModel emailServer = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.SetSystemSettings(
+            var result = siSenseSDKExtensions.SetSystemSettings(
                 operations,
                 emailServer,
                 authorization);
@@ -876,14 +835,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task SetSystemSettingsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             EmailServerModelModel emailServer = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.SetSystemSettingsAsync(
+            var result = await siSenseSDKExtensions.SetSystemSettingsAsync(
                 operations,
                 emailServer,
                 authorization,
@@ -897,12 +856,12 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetGlobalization_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.GetGlobalization(
+            var result = siSenseSDKExtensions.GetGlobalization(
                 operations,
                 authorization);
 
@@ -914,13 +873,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetGlobalizationAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.GetGlobalizationAsync(
+            var result = await siSenseSDKExtensions.GetGlobalizationAsync(
                 operations,
                 authorization,
                 cancellationToken);
@@ -933,13 +892,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public void Add_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             Globalization globalization = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.Add(
+            var result = siSenseSDKExtensions.Add(
                 operations,
                 globalization,
                 authorization);
@@ -952,14 +911,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task AddAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             Globalization globalization = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.AddAsync(
+            var result = await siSenseSDKExtensions.AddAsync(
                 operations,
                 globalization,
                 authorization,
@@ -973,13 +932,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public void Update_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             Globalization globalization = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.Update(
+            var result = siSenseSDKExtensions.Update(
                 operations,
                 globalization,
                 authorization);
@@ -992,14 +951,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task UpdateAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             Globalization globalization = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.UpdateAsync(
+            var result = await siSenseSDKExtensions.UpdateAsync(
                 operations,
                 globalization,
                 authorization,
@@ -1013,12 +972,12 @@ namespace UnOffSiSenseDotNet.test.V1
         public void RemoveGlobalization_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.RemoveGlobalization(
+            var result = siSenseSDKExtensions.RemoveGlobalization(
                 operations,
                 authorization);
 
@@ -1030,13 +989,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task RemoveGlobalizationAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.RemoveGlobalizationAsync(
+            var result = await siSenseSDKExtensions.RemoveGlobalizationAsync(
                 operations,
                 authorization,
                 cancellationToken);
@@ -1049,12 +1008,12 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetTranslation_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.GetTranslation(
+            var result = siSenseSDKExtensions.GetTranslation(
                 operations,
                 authorization);
 
@@ -1066,13 +1025,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetTranslationAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.GetTranslationAsync(
+            var result = await siSenseSDKExtensions.GetTranslationAsync(
                 operations,
                 authorization,
                 cancellationToken);
@@ -1085,11 +1044,11 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetPulseSettings_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
 
             // Act
-            var result = SiSenseSDKExtensions.GetPulseSettings(
+            var result = siSenseSDKExtensions.GetPulseSettings(
                 operations);
 
             // Assert
@@ -1100,12 +1059,12 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetPulseSettingsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.GetPulseSettingsAsync(
+            var result = await siSenseSDKExtensions.GetPulseSettingsAsync(
                 operations,
                 cancellationToken);
 
@@ -1117,13 +1076,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public void SetPulseSettings_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             Pulse pulse = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.SetPulseSettings(
+            var result = siSenseSDKExtensions.SetPulseSettings(
                 operations,
                 pulse,
                 authorization);
@@ -1136,14 +1095,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task SetPulseSettingsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             Pulse pulse = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.SetPulseSettingsAsync(
+            var result = await siSenseSDKExtensions.SetPulseSettingsAsync(
                 operations,
                 pulse,
                 authorization,
@@ -1157,13 +1116,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public void Patch_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             Pulse pulse = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.Patch(
+            var result = siSenseSDKExtensions.Patch(
                 operations,
                 pulse,
                 authorization);
@@ -1176,14 +1135,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task PatchAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             Pulse pulse = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.PatchAsync(
+            var result = await siSenseSDKExtensions.PatchAsync(
                 operations,
                 pulse,
                 authorization,
@@ -1197,12 +1156,12 @@ namespace UnOffSiSenseDotNet.test.V1
         public void RemovePulseSettings_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.RemovePulseSettings(
+            var result = siSenseSDKExtensions.RemovePulseSettings(
                 operations,
                 authorization);
 
@@ -1214,13 +1173,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task RemovePulseSettingsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.RemovePulseSettingsAsync(
+            var result = await siSenseSDKExtensions.RemovePulseSettingsAsync(
                 operations,
                 authorization,
                 cancellationToken);
@@ -1233,11 +1192,11 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetPivotSettings_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
 
             // Act
-            var result = SiSenseSDKExtensions.GetPivotSettings(
+            var result = siSenseSDKExtensions.GetPivotSettings(
                 operations);
 
             // Assert
@@ -1248,12 +1207,12 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetPivotSettingsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.GetPivotSettingsAsync(
+            var result = await siSenseSDKExtensions.GetPivotSettingsAsync(
                 operations,
                 cancellationToken);
 
@@ -1265,13 +1224,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public void PatchPivotSettings_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             Pivot pivot = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.PatchPivotSettings(
+            var result = siSenseSDKExtensions.PatchPivotSettings(
                 operations,
                 pivot,
                 authorization);
@@ -1284,14 +1243,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task PatchPivotSettingsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             Pivot pivot = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.PatchPivotSettingsAsync(
+            var result = await siSenseSDKExtensions.PatchPivotSettingsAsync(
                 operations,
                 pivot,
                 authorization,
@@ -1305,13 +1264,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetLang_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string lang = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.GetLang(
+            var result = siSenseSDKExtensions.GetLang(
                 operations,
                 lang,
                 authorization);
@@ -1324,14 +1283,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetLangAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string lang = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.GetLangAsync(
+            var result = await siSenseSDKExtensions.GetLangAsync(
                 operations,
                 lang,
                 authorization,
@@ -1345,13 +1304,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetIntlLang_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string lang = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.GetIntlLang(
+            var result = siSenseSDKExtensions.GetIntlLang(
                 operations,
                 lang,
                 authorization);
@@ -1364,14 +1323,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetIntlLangAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string lang = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.GetIntlLangAsync(
+            var result = await siSenseSDKExtensions.GetIntlLangAsync(
                 operations,
                 lang,
                 authorization,
@@ -1385,12 +1344,12 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetAllLangs_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.GetAllLangs(
+            var result = siSenseSDKExtensions.GetAllLangs(
                 operations,
                 authorization);
 
@@ -1402,13 +1361,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetAllLangsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.GetAllLangsAsync(
+            var result = await siSenseSDKExtensions.GetAllLangsAsync(
                 operations,
                 authorization,
                 cancellationToken);
@@ -1421,11 +1380,11 @@ namespace UnOffSiSenseDotNet.test.V1
         public void Get_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
 
             // Act
-            var result = SiSenseSDKExtensions.Get(
+            var result = siSenseSDKExtensions.Get(
                 operations);
 
             // Assert
@@ -1436,12 +1395,12 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.GetAsync(
+            var result = await siSenseSDKExtensions.GetAsync(
                 operations,
                 cancellationToken);
 
@@ -1453,13 +1412,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public void UpdateLockoutUsingPatch_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             LoginLockoutSettings loginLockoutSettings = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.UpdateLockoutUsingPatch(
+            var result = siSenseSDKExtensions.UpdateLockoutUsingPatch(
                 operations,
                 loginLockoutSettings,
                 authorization);
@@ -1472,14 +1431,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task UpdateLockoutUsingPatchAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             LoginLockoutSettings loginLockoutSettings = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.UpdateLockoutUsingPatchAsync(
+            var result = await siSenseSDKExtensions.UpdateLockoutUsingPatchAsync(
                 operations,
                 loginLockoutSettings,
                 authorization,
@@ -1493,13 +1452,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetEcmModelUsingGET_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string cubeTitle = null;
             string server = null;
 
             // Act
-            var result = SiSenseSDKExtensions.GetEcmModelUsingGET(
+            var result = siSenseSDKExtensions.GetEcmModelUsingGET(
                 operations,
                 cubeTitle,
                 server);
@@ -1512,14 +1471,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetEcmModelUsingGETAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string cubeTitle = null;
             string server = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.GetEcmModelUsingGETAsync(
+            var result = await siSenseSDKExtensions.GetEcmModelUsingGETAsync(
                 operations,
                 cubeTitle,
                 server,
@@ -1533,7 +1492,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void Login_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string username = null;
             string password = null;
@@ -1541,7 +1500,7 @@ namespace UnOffSiSenseDotNet.test.V1
             string localeId = null;
 
             // Act
-            var result = SiSenseSDKExtensions.Login(
+            var result = siSenseSDKExtensions.Login(
                 operations,
                 username,
                 password,
@@ -1556,18 +1515,16 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task LoginAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient();
-            httpClient.BaseAddress = new Uri(configuration.BaseUrl);
-            //ISiSenseSDK operations = new SiSenseSDK(httpClient, true);
-            ISiSenseSDK operations = new SiSenseSDK(new Uri(configuration.BaseUrl));
-            string username = configuration.Username;
-            string password = configuration.Password;
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
+            ISiSenseSDK operations = null;
+            string username = null;
+            string password = null;
             string xDeviceId = null;
             string localeId = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.LoginAsync(
+            var result = await siSenseSDKExtensions.LoginAsync(
                 operations,
                 username,
                 password,
@@ -1576,21 +1533,21 @@ namespace UnOffSiSenseDotNet.test.V1
                 cancellationToken);
 
             // Assert
-            Assert.NotNull(result);
+            Assert.True(false);
         }
 
         [Fact]
         public void Logout_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string xDeviceId = null;
             string authorization = null;
             string targetDevice = null;
 
             // Act
-            var result = SiSenseSDKExtensions.Logout(
+            var result = siSenseSDKExtensions.Logout(
                 operations,
                 xDeviceId,
                 authorization,
@@ -1604,7 +1561,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task LogoutAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string xDeviceId = null;
             string authorization = null;
@@ -1612,7 +1569,7 @@ namespace UnOffSiSenseDotNet.test.V1
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.LogoutAsync(
+            var result = await siSenseSDKExtensions.LogoutAsync(
                 operations,
                 xDeviceId,
                 authorization,
@@ -1627,13 +1584,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public void LogoutAll_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string xDeviceId = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.LogoutAll(
+            var result = siSenseSDKExtensions.LogoutAll(
                 operations,
                 xDeviceId,
                 authorization);
@@ -1646,14 +1603,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task LogoutAllAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string xDeviceId = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.LogoutAllAsync(
+            var result = await siSenseSDKExtensions.LogoutAllAsync(
                 operations,
                 xDeviceId,
                 authorization,
@@ -1667,14 +1624,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public void LogoutAllUsers_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string xDeviceId = null;
             string authorization = null;
             object empty = null;
 
             // Act
-            var result = SiSenseSDKExtensions.LogoutAllUsers(
+            var result = siSenseSDKExtensions.LogoutAllUsers(
                 operations,
                 xDeviceId,
                 authorization,
@@ -1688,7 +1645,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task LogoutAllUsersAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string xDeviceId = null;
             string authorization = null;
@@ -1696,7 +1653,7 @@ namespace UnOffSiSenseDotNet.test.V1
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.LogoutAllUsersAsync(
+            var result = await siSenseSDKExtensions.LogoutAllUsersAsync(
                 operations,
                 xDeviceId,
                 authorization,
@@ -1711,14 +1668,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public void LogoutUsers_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
-            IList<string> users = null;
+            IList users = null;
             string xDeviceId = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.LogoutUsers(
+            var result = siSenseSDKExtensions.LogoutUsers(
                 operations,
                 users,
                 xDeviceId,
@@ -1732,15 +1689,15 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task LogoutUsersAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
-            IList<string> users = null;
+            IList users = null;
             string xDeviceId = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.LogoutUsersAsync(
+            var result = await siSenseSDKExtensions.LogoutUsersAsync(
                 operations,
                 users,
                 xDeviceId,
@@ -1755,14 +1712,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public void RevokeTokens_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string tokenType = null;
-            IList<string> users = null;
+            IList users = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.RevokeTokens(
+            var result = siSenseSDKExtensions.RevokeTokens(
                 operations,
                 tokenType,
                 users,
@@ -1776,15 +1733,15 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task RevokeTokensAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string tokenType = null;
-            IList<string> users = null;
+            IList users = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.RevokeTokensAsync(
+            var result = await siSenseSDKExtensions.RevokeTokensAsync(
                 operations,
                 tokenType,
                 users,
@@ -1799,13 +1756,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public void SamlLoginCallback_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string relayState = null;
             string sAMLResponse = null;
 
             // Act
-            SiSenseSDKExtensions.SamlLoginCallback(
+            siSenseSDKExtensions.SamlLoginCallback(
                 operations,
                 relayState,
                 sAMLResponse);
@@ -1818,14 +1775,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task SamlLoginCallbackAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string relayState = null;
             string sAMLResponse = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            await SiSenseSDKExtensions.SamlLoginCallbackAsync(
+            await siSenseSDKExtensions.SamlLoginCallbackAsync(
                 operations,
                 relayState,
                 sAMLResponse,
@@ -1839,12 +1796,12 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetAllServersAccess_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string authorization = null;
 
             // Act
-            SiSenseSDKExtensions.GetAllServersAccess(
+            siSenseSDKExtensions.GetAllServersAccess(
                 operations,
                 authorization);
 
@@ -1856,13 +1813,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetAllServersAccessAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            await SiSenseSDKExtensions.GetAllServersAccessAsync(
+            await siSenseSDKExtensions.GetAllServersAccessAsync(
                 operations,
                 authorization,
                 cancellationToken);
@@ -1875,13 +1832,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public void AddServerAccess_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             ServerAccess serverAccess = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.AddServerAccess(
+            var result = siSenseSDKExtensions.AddServerAccess(
                 operations,
                 serverAccess,
                 authorization);
@@ -1894,14 +1851,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task AddServerAccessAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             ServerAccess serverAccess = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.AddServerAccessAsync(
+            var result = await siSenseSDKExtensions.AddServerAccessAsync(
                 operations,
                 serverAccess,
                 authorization,
@@ -1915,7 +1872,9 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetOwnedDashboards_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            ISiSenseSDK operations = new SiSenseSDK(new Uri(configuration.BaseUrl));
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
+            ISiSenseSDK operations = null;
+            string authorization = null;
             string parentFolder = null;
             string name = null;
             string datasourceTitle = null;
@@ -1924,9 +1883,9 @@ namespace UnOffSiSenseDotNet.test.V1
             string expand = null;
 
             // Act
-            var result = SiSenseSDKExtensions.GetOwnedDashboards(
+            var result = siSenseSDKExtensions.GetOwnedDashboards(
                 operations,
-                Authorization,
+                authorization,
                 parentFolder,
                 name,
                 datasourceTitle,
@@ -1935,13 +1894,14 @@ namespace UnOffSiSenseDotNet.test.V1
                 expand);
 
             // Assert
-            Assert.NotNull(result);
+            Assert.True(false);
         }
 
         [Fact]
         public async Task GetOwnedDashboardsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             string authorization = null;
             string parentFolder = null;
@@ -1953,7 +1913,7 @@ namespace UnOffSiSenseDotNet.test.V1
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.GetOwnedDashboardsAsync(
+            var result = await siSenseSDKExtensions.GetOwnedDashboardsAsync(
                 operations,
                 authorization,
                 parentFolder,
@@ -1972,12 +1932,13 @@ namespace UnOffSiSenseDotNet.test.V1
         public void AddDashboard_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             DashboardModel dashboard = null;
             string authorization = null;
 
             // Act
-            var result = SiSenseSDKExtensions.AddDashboard(
+            var result = siSenseSDKExtensions.AddDashboard(
                 operations,
                 dashboard,
                 authorization);
@@ -1990,13 +1951,14 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task AddDashboardAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
+            var siSenseSDKExtensions = this.CreateSiSenseSDKExtensions();
             ISiSenseSDK operations = null;
             DashboardModel dashboard = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
             // Act
-            var result = await SiSenseSDKExtensions.AddDashboardAsync(
+            var result = await siSenseSDKExtensions.AddDashboardAsync(
                 operations,
                 dashboard,
                 authorization,

@@ -75,7 +75,7 @@ namespace UnOffSiSenseDotNet.V1
         /// <summary>
         /// The user's API token preceded by the keyword `Bearer ` (with space between
         /// it and the token). For more information, see [API
-        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// tutorial](http://developer.sisense.com/display/API2/UsingtheRESTAPI).
         /// </summary>
         public string Authorization { get; set; }
 
@@ -8681,6 +8681,380 @@ namespace UnOffSiSenseDotNet.V1
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<AddServerAccessBadRequestResponse>(_responseContent, DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.Exit(_invocationId, _result);
+            }
+            return _result;
+        }
+
+        /// <summary>
+        /// Get a user's dashboards
+        /// </summary>
+        /// <remarks>
+        /// The **get dashboards** endpoint provides access to a specified user's
+        /// dashboards in their stored format as `JSON` objects.
+        /// &lt;br/&gt;It's results can be filtered by parameters such as dashboard
+        /// name, parent folder, or datasource.
+        /// &lt;br/&gt;&lt;br/&gt;The expandable fields for the dashboard object are
+        /// `widgets`, `parentFolder`, `userAuth`, `rule` and `owner`.
+        ///
+        /// </remarks>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space between
+        /// it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='parentFolder'>
+        /// Parent folder ID to filter by
+        /// </param>
+        /// <param name='name'>
+        /// Name to filter by
+        /// </param>
+        /// <param name='datasourceTitle'>
+        /// Datasource name to filter by
+        /// </param>
+        /// <param name='datasourceAddress'>
+        /// Datasource address to filter by
+        /// </param>
+        /// <param name='fields'>
+        /// Whitelist of fields to return for each document. fields Can also define
+        /// which fields to exclude by prefixing field names with `-`
+        /// </param>
+        /// <param name='expand'>
+        /// List of fields that should be expanded (substitures their IDs with actual
+        /// objects). May be nested using the `resource.subResource` format
+        /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="HttpOperationException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
+        public async Task<HttpOperationResponse<IList<GetOwnedDashboardsOKResponseItem>>> GetOwnedDashboardsWithHttpMessagesAsync(string authorization = default(string), string parentFolder = default(string), string name = default(string), string datasourceTitle = default(string), string datasourceAddress = default(string), string fields = default(string), string expand = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (authorization != null)
+            {
+                if (!System.Text.RegularExpressions.Regex.IsMatch(authorization, "^Bearer .*"))
+                {
+                    throw new ValidationException(ValidationRules.Pattern, "authorization", "^Bearer .*");
+                }
+            }
+            // Tracing
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
+            {
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("authorization", authorization);
+                tracingParameters.Add("parentFolder", parentFolder);
+                tracingParameters.Add("name", name);
+                tracingParameters.Add("datasourceTitle", datasourceTitle);
+                tracingParameters.Add("datasourceAddress", datasourceAddress);
+                tracingParameters.Add("fields", fields);
+                tracingParameters.Add("expand", expand);
+                tracingParameters.Add("cancellationToken", cancellationToken);
+                ServiceClientTracing.Enter(_invocationId, this, "GetOwnedDashboards", tracingParameters);
+            }
+            // Construct URL
+            var _baseUrl = BaseUri.AbsoluteUri;
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "dashboards").ToString();
+            List<string> _queryParameters = new List<string>();
+            if (parentFolder != null)
+            {
+                _queryParameters.Add(string.Format("parentFolder={0}", System.Uri.EscapeDataString(parentFolder)));
+            }
+            if (name != null)
+            {
+                _queryParameters.Add(string.Format("name={0}", System.Uri.EscapeDataString(name)));
+            }
+            if (datasourceTitle != null)
+            {
+                _queryParameters.Add(string.Format("datasourceTitle={0}", System.Uri.EscapeDataString(datasourceTitle)));
+            }
+            if (datasourceAddress != null)
+            {
+                _queryParameters.Add(string.Format("datasourceAddress={0}", System.Uri.EscapeDataString(datasourceAddress)));
+            }
+            if (fields != null)
+            {
+                _queryParameters.Add(string.Format("fields={0}", System.Uri.EscapeDataString(fields)));
+            }
+            if (expand != null)
+            {
+                _queryParameters.Add(string.Format("expand={0}", System.Uri.EscapeDataString(expand)));
+            }
+            if (_queryParameters.Count > 0)
+            {
+                _url += "?" + string.Join("&", _queryParameters);
+            }
+            // Create HTTP transport objects
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("GET");
+            _httpRequest.RequestUri = new System.Uri(_url);
+            // Set Headers
+            if (authorization != null)
+            {
+                if (_httpRequest.Headers.Contains("authorization"))
+                {
+                    _httpRequest.Headers.Remove("authorization");
+                }
+                _httpRequest.Headers.TryAddWithoutValidation("authorization", authorization);
+            }
+
+
+            if (customHeaders != null)
+            {
+                foreach(var _header in customHeaders)
+                {
+                    if (_httpRequest.Headers.Contains(_header.Key))
+                    {
+                        _httpRequest.Headers.Remove(_header.Key);
+                    }
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
+                }
+            }
+
+            // Serialize Request
+            string _requestContent = null;
+            // Send Request
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+            }
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
+            if ((int)_statusCode != 200)
+            {
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Error(_invocationId, ex);
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+            // Create Result
+            var _result = new HttpOperationResponse<IList<GetOwnedDashboardsOKResponseItem>>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
+            // Deserialize Response
+            if ((int)_statusCode == 200)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<IList<GetOwnedDashboardsOKResponseItem>>(_responseContent, DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.Exit(_invocationId, _result);
+            }
+            return _result;
+        }
+
+        /// <summary>
+        /// Add a new dashboard
+        /// </summary>
+        /// <remarks>
+        /// The **add dashboard** endpoint reveives a dashboard object and adds it to
+        /// the user's dashboards.
+        /// </remarks>
+        /// <param name='dashboard'>
+        /// Basic dashboard object to be added
+        /// </param>
+        /// <param name='authorization'>
+        /// The user's API token preceded by the keyword `Bearer ` (with space between
+        /// it and the token). For more information, see [API
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
+        /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="HttpOperationException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
+        public async Task<HttpOperationResponse<AddDashboardCreatedResponse>> AddDashboardWithHttpMessagesAsync(DashboardModel dashboard, string authorization = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (authorization != null)
+            {
+                if (!System.Text.RegularExpressions.Regex.IsMatch(authorization, "^Bearer .*"))
+                {
+                    throw new ValidationException(ValidationRules.Pattern, "authorization", "^Bearer .*");
+                }
+            }
+            if (dashboard == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "dashboard");
+            }
+            if (dashboard != null)
+            {
+                dashboard.Validate();
+            }
+            // Tracing
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
+            {
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("authorization", authorization);
+                tracingParameters.Add("dashboard", dashboard);
+                tracingParameters.Add("cancellationToken", cancellationToken);
+                ServiceClientTracing.Enter(_invocationId, this, "AddDashboard", tracingParameters);
+            }
+            // Construct URL
+            var _baseUrl = BaseUri.AbsoluteUri;
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "dashboards").ToString();
+            // Create HTTP transport objects
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
+            _httpRequest.RequestUri = new System.Uri(_url);
+            // Set Headers
+            if (authorization != null)
+            {
+                if (_httpRequest.Headers.Contains("authorization"))
+                {
+                    _httpRequest.Headers.Remove("authorization");
+                }
+                _httpRequest.Headers.TryAddWithoutValidation("authorization", authorization);
+            }
+
+
+            if (customHeaders != null)
+            {
+                foreach(var _header in customHeaders)
+                {
+                    if (_httpRequest.Headers.Contains(_header.Key))
+                    {
+                        _httpRequest.Headers.Remove(_header.Key);
+                    }
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
+                }
+            }
+
+            // Serialize Request
+            string _requestContent = null;
+            if(dashboard != null)
+            {
+                _requestContent = SafeJsonConvert.SerializeObject(dashboard, SerializationSettings);
+                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
+                _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            }
+            // Send Request
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+            }
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
+            if ((int)_statusCode != 201)
+            {
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Error(_invocationId, ex);
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+            // Create Result
+            var _result = new HttpOperationResponse<AddDashboardCreatedResponse>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
+            // Deserialize Response
+            if ((int)_statusCode == 201)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<AddDashboardCreatedResponse>(_responseContent, DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
