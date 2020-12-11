@@ -126,7 +126,7 @@ partial class Build : NukeBuild
     .Requires(() => !NuGetApiKey.IsNullOrEmpty() || !IsOriginalRepository)
     .Requires(() => GitHasCleanWorkingCopy())
     .Requires(() => Configuration.Equals(Configuration.Release))
-    .Requires(() => IsOriginalRepository && GitRepository.IsOnMasterBranch() ||
+    .Requires(() => IsOriginalRepository && GitRepository.IsOnMainBranch() ||
                     IsOriginalRepository && GitRepository.IsOnReleaseBranch() ||
                     !IsOriginalRepository && GitRepository.IsOnDevelopBranch())
     .Executes(() =>
@@ -139,7 +139,7 @@ partial class Build : NukeBuild
                 .SetPassword(GitHubToken));
         }
 
-        Assert(PackageFiles.Count == 4, "packages.Count == 4");
+        Assert(PackageFiles.Count == 1, "packages.Count == 1");
 
         DotNetNuGetPush(_ => _
                 .SetSource(Source)
