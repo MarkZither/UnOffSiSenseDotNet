@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "_build": {
+      "commandName": "Project",
+      "commandLineArgs": "--target publish --NuGetApiKey oy2dh5tmgobholi2wg2qbv4ghrns5ocejk4ye4sm4ghwnq"
+    }
+  }
+}
