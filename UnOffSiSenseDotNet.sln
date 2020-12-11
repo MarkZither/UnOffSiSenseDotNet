@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30709.64
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{070F6CD7-8AC4-4E66-99CF-B53DD4B8CD6A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnOffSiSenseDotNet", "src\UnOffSiSenseDotNet\UnOffSiSenseDotNet.csproj", "{2B9EF28E-C57D-48CF-89B7-4BF245DBA476}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarkZither.UnOffSiSenseDotNet", "src\UnOffSiSenseDotNet\MarkZither.UnOffSiSenseDotNet.csproj", "{2B9EF28E-C57D-48CF-89B7-4BF245DBA476}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FFF82E8B-0113-4222-BD12-A5D6CA3A8330}"
 EndProject

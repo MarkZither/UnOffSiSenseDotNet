@@ -37,7 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\UnOffSiSenseDotNet\UnOffSiSenseDotNet.csproj" />
+    <ProjectReference Include="..\..\src\UnOffSiSenseDotNet\MarkZither.UnOffSiSenseDotNet.csproj" />
   </ItemGroup>
 
   <ItemGroup>
