@@ -75,7 +75,7 @@ namespace UnOffSiSenseDotNet.V1
         /// <summary>
         /// The user's API token preceded by the keyword `Bearer ` (with space between
         /// it and the token). For more information, see [API
-        /// tutorial](http://developer.sisense.com/display/API2/UsingtheRESTAPI).
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
         /// </summary>
         public string Authorization { get; set; }
 
@@ -7429,7 +7429,7 @@ namespace UnOffSiSenseDotNet.V1
         /// <param name='authorization'>
         /// The user's API token preceded by the keyword `Bearer ` (with space between
         /// it and the token). For more information, see [API
-        /// tutorial](http://developer.sisense.com/display/API2/UsingtheRESTAPI).
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
         /// </param>
         /// <param name='targetDevice'>
         /// Specific Device ID who's token to revoke. If not provided, the user's API
@@ -7600,7 +7600,7 @@ namespace UnOffSiSenseDotNet.V1
         /// <param name='authorization'>
         /// The user's API token preceded by the keyword `Bearer ` (with space between
         /// it and the token). For more information, see [API
-        /// tutorial](http://developer.sisense.com/display/API2/UsingtheRESTAPI).
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -7757,7 +7757,7 @@ namespace UnOffSiSenseDotNet.V1
         /// <param name='authorization'>
         /// The user's API token preceded by the keyword `Bearer ` (with space between
         /// it and the token). For more information, see [API
-        /// tutorial](http://developer.sisense.com/display/API2/UsingtheRESTAPI).
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
         /// </param>
         /// <param name='empty'>
         /// empty object.
@@ -7928,7 +7928,7 @@ namespace UnOffSiSenseDotNet.V1
         /// <param name='authorization'>
         /// The user's API token preceded by the keyword `Bearer ` (with space between
         /// it and the token). For more information, see [API
-        /// tutorial](http://developer.sisense.com/display/API2/UsingtheRESTAPI).
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -8109,7 +8109,7 @@ namespace UnOffSiSenseDotNet.V1
         /// <param name='authorization'>
         /// The user's API token preceded by the keyword `Bearer ` (with space between
         /// it and the token). For more information, see [API
-        /// tutorial](http://developer.sisense.com/display/API2/UsingtheRESTAPI).
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -8416,7 +8416,7 @@ namespace UnOffSiSenseDotNet.V1
         /// <param name='authorization'>
         /// The user's API token preceded by the keyword `Bearer ` (with space between
         /// it and the token). For more information, see [API
-        /// tutorial](http://developer.sisense.com/display/API2/UsingtheRESTAPI).
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -8543,7 +8543,7 @@ namespace UnOffSiSenseDotNet.V1
         /// <param name='authorization'>
         /// The user's API token preceded by the keyword `Bearer ` (with space between
         /// it and the token). For more information, see [API
-        /// tutorial](http://developer.sisense.com/display/API2/UsingtheRESTAPI).
+        /// tutorial](http://developer.sisense.com/display/API2/Using+the+REST+API).
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
