@@ -33,7 +33,6 @@ namespace UnOffSiSenseDotNet.test.V1
             configuration = TestHelper.GetApplicationConfiguration(dirPath);
 
             this.fakeHttpClient = A.Fake<HttpClient>();
-
         }
 
         private SiSenseSDK CreateSiSenseSDK()

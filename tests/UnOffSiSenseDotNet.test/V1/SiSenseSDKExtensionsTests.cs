@@ -1,5 +1,3 @@
-using FakeItEasy;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,8 +16,9 @@ namespace UnOffSiSenseDotNet.test.V1
 
         public string Authorization
         {
-            get {
-                if(!string.IsNullOrEmpty(authorization))
+            get
+            {
+                if (!string.IsNullOrEmpty(authorization))
                 {
                     return authorization;
                 }
@@ -46,7 +45,7 @@ namespace UnOffSiSenseDotNet.test.V1
             set { authorization = value; }
         }
 
-       private SiSenseConfiguration configuration;
+        private SiSenseConfiguration configuration;
 
         public SiSenseSDKExtensionsTests()
         {
@@ -120,7 +119,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetCardsNamesAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string path = null;
             string authorization = null;
@@ -141,7 +140,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetCardByName_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -162,7 +161,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetCardByNameAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -185,7 +184,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetSnippets_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string path = null;
             string authorization = null;
@@ -206,7 +205,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetSnippetsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string path = null;
             string authorization = null;
@@ -229,7 +228,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetCustomActions_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string path = null;
             string authorization = null;
@@ -248,7 +247,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetCustomActionsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string path = null;
             string authorization = null;
@@ -269,7 +268,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetActionByType_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -290,7 +289,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetActionByTypeAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -313,7 +312,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void SaveNewTamplate_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -334,7 +333,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task SaveNewTamplateAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -357,7 +356,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void SaveCustomAction_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -378,7 +377,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task SaveCustomActionAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -401,7 +400,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void DeleteCard_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -422,7 +421,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task DeleteCardAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -445,7 +444,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void DeleteCustomAction_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -466,7 +465,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task DeleteCustomActionAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -489,7 +488,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void Logger_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -510,7 +509,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task LoggerAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -533,7 +532,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void CardAnalysis_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -554,7 +553,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task CardAnalysisAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string path = null;
             object body = null;
@@ -577,7 +576,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetEmailServer_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
 
             // Act
@@ -592,7 +591,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetEmailServerAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
@@ -609,7 +608,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void AddEmailServer_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             EmailServer emailServer = null;
             string authorization = null;
@@ -628,7 +627,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task AddEmailServerAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             EmailServer emailServer = null;
             string authorization = null;
@@ -649,7 +648,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void UpdateEmailServer_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             EmailServerModel emailServer = null;
             string authorization = null;
@@ -668,7 +667,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task UpdateEmailServerAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             EmailServerModel emailServer = null;
             string authorization = null;
@@ -689,7 +688,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void DeleteEmailServer_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
 
             // Act
@@ -704,7 +703,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task DeleteEmailServerAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
@@ -721,7 +720,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetPublicSettings_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
 
             // Act
@@ -736,7 +735,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetPublicSettingsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
@@ -753,7 +752,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetSsoSettings_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
 
             // Act
@@ -768,7 +767,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetSsoSettingsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
@@ -785,7 +784,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void SetSsoSettings_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             Sso sso = null;
             string authorization = null;
@@ -804,7 +803,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task SetSsoSettingsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             Sso sso = null;
             string authorization = null;
@@ -825,7 +824,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetSystemSettings_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
 
             // Act
@@ -840,7 +839,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetSystemSettingsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
@@ -857,7 +856,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void SetSystemSettings_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             EmailServerModelModel emailServer = null;
             string authorization = null;
@@ -876,7 +875,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task SetSystemSettingsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             EmailServerModelModel emailServer = null;
             string authorization = null;
@@ -897,7 +896,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetGlobalization_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string authorization = null;
 
@@ -914,7 +913,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetGlobalizationAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
@@ -933,7 +932,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void Add_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             Globalization globalization = null;
             string authorization = null;
@@ -952,7 +951,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task AddAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             Globalization globalization = null;
             string authorization = null;
@@ -973,7 +972,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void Update_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             Globalization globalization = null;
             string authorization = null;
@@ -992,7 +991,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task UpdateAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             Globalization globalization = null;
             string authorization = null;
@@ -1013,7 +1012,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void RemoveGlobalization_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string authorization = null;
 
@@ -1030,7 +1029,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task RemoveGlobalizationAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
@@ -1049,7 +1048,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetTranslation_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string authorization = null;
 
@@ -1066,7 +1065,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetTranslationAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
@@ -1085,7 +1084,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetPulseSettings_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
 
             // Act
@@ -1100,7 +1099,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetPulseSettingsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
@@ -1117,7 +1116,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void SetPulseSettings_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             Pulse pulse = null;
             string authorization = null;
@@ -1136,7 +1135,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task SetPulseSettingsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             Pulse pulse = null;
             string authorization = null;
@@ -1157,7 +1156,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void Patch_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             Pulse pulse = null;
             string authorization = null;
@@ -1176,7 +1175,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task PatchAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             Pulse pulse = null;
             string authorization = null;
@@ -1197,7 +1196,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void RemovePulseSettings_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string authorization = null;
 
@@ -1214,7 +1213,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task RemovePulseSettingsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
@@ -1233,7 +1232,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetPivotSettings_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
 
             // Act
@@ -1248,7 +1247,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetPivotSettingsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
@@ -1265,7 +1264,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void PatchPivotSettings_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             Pivot pivot = null;
             string authorization = null;
@@ -1284,7 +1283,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task PatchPivotSettingsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             Pivot pivot = null;
             string authorization = null;
@@ -1305,7 +1304,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetLang_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string lang = null;
             string authorization = null;
@@ -1324,7 +1323,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetLangAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string lang = null;
             string authorization = null;
@@ -1345,7 +1344,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetIntlLang_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string lang = null;
             string authorization = null;
@@ -1364,7 +1363,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetIntlLangAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string lang = null;
             string authorization = null;
@@ -1385,7 +1384,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetAllLangs_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string authorization = null;
 
@@ -1402,7 +1401,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetAllLangsAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
@@ -1421,7 +1420,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void Get_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
 
             // Act
@@ -1436,7 +1435,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
@@ -1453,7 +1452,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void UpdateLockoutUsingPatch_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             LoginLockoutSettings loginLockoutSettings = null;
             string authorization = null;
@@ -1472,7 +1471,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task UpdateLockoutUsingPatchAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             LoginLockoutSettings loginLockoutSettings = null;
             string authorization = null;
@@ -1493,7 +1492,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetEcmModelUsingGET_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string cubeTitle = null;
             string server = null;
@@ -1512,7 +1511,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetEcmModelUsingGETAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string cubeTitle = null;
             string server = null;
@@ -1533,7 +1532,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void Login_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string username = null;
             string password = null;
@@ -1583,7 +1582,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void Logout_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string xDeviceId = null;
             string authorization = null;
@@ -1604,7 +1603,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task LogoutAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string xDeviceId = null;
             string authorization = null;
@@ -1627,7 +1626,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void LogoutAll_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string xDeviceId = null;
             string authorization = null;
@@ -1646,7 +1645,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task LogoutAllAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string xDeviceId = null;
             string authorization = null;
@@ -1667,7 +1666,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void LogoutAllUsers_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string xDeviceId = null;
             string authorization = null;
@@ -1688,7 +1687,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task LogoutAllUsersAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string xDeviceId = null;
             string authorization = null;
@@ -1711,7 +1710,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void LogoutUsers_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             IList<string> users = null;
             string xDeviceId = null;
@@ -1732,7 +1731,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task LogoutUsersAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             IList<string> users = null;
             string xDeviceId = null;
@@ -1755,7 +1754,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void RevokeTokens_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string tokenType = null;
             IList<string> users = null;
@@ -1776,7 +1775,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task RevokeTokensAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string tokenType = null;
             IList<string> users = null;
@@ -1799,7 +1798,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void SamlLoginCallback_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string relayState = null;
             string sAMLResponse = null;
@@ -1818,7 +1817,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task SamlLoginCallbackAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string relayState = null;
             string sAMLResponse = null;
@@ -1839,7 +1838,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void GetAllServersAccess_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string authorization = null;
 
@@ -1856,7 +1855,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task GetAllServersAccessAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             string authorization = null;
             CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
@@ -1875,7 +1874,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public void AddServerAccess_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             ServerAccess serverAccess = null;
             string authorization = null;
@@ -1894,7 +1893,7 @@ namespace UnOffSiSenseDotNet.test.V1
         public async Task AddServerAccessAsync_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            
+
             ISiSenseSDK operations = null;
             ServerAccess serverAccess = null;
             string authorization = null;

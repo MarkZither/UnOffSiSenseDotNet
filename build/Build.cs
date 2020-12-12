@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Nuke.Common;
 using Nuke.Common.CI;
 using Nuke.Common.CI.AzurePipelines;
@@ -15,13 +12,15 @@ using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.GitVersion;
 using Nuke.Common.Utilities;
 using Nuke.Common.Utilities.Collections;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using static Nuke.Common.ChangeLog.ChangelogTasks;
 using static Nuke.Common.ControlFlow;
-using static Nuke.Common.EnvironmentInfo;
 using static Nuke.Common.IO.FileSystemTasks;
-using static Nuke.Common.Tools.Git.GitTasks;
 using static Nuke.Common.IO.PathConstruction;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
+using static Nuke.Common.Tools.Git.GitTasks;
 
 [CheckBuildProjectConfigurations]
 [ShutdownDotNetAfterServerBuild]
@@ -44,110 +43,111 @@ partial class Build : NukeBuild
     ///   - Microsoft VisualStudio     https://nuke.build/visualstudio
     ///   - Microsoft VSCode           https://nuke.build/vscode
 
-    public static int Main () => Execute<Build>(x => x.Compile);
+    public static int Main() => Execute<Build>(x => x.Compile);
 
-    [CI] readonly TeamCity TeamCity;
-    [CI] readonly AzurePipelines AzurePipelines;
-    [CI] readonly GitHubActions GitHubActions;
+    [CI] private readonly TeamCity TeamCity;
+    [CI] private readonly AzurePipelines AzurePipelines;
+    [CI] private readonly GitHubActions GitHubActions;
 
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
-    readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
+    private readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
-    [Solution] readonly Solution Solution;
-    [GitRepository] readonly GitRepository GitRepository;
-    [GitVersion(Framework = "netcoreapp3.1")] readonly GitVersion GitVersion;
+    [Solution] private readonly Solution Solution;
+    [GitRepository] private readonly GitRepository GitRepository;
+    [GitVersion(Framework = "netcoreapp3.1")] private readonly GitVersion GitVersion;
 
     AbsolutePath SourceDirectory => RootDirectory / "src";
     AbsolutePath TestsDirectory => RootDirectory / "tests";
     AbsolutePath OutputDirectory => RootDirectory / "output";
-    
-    const string MainBranch = "main";
-    const string DevelopBranch = "develop";
-    const string ReleaseBranchPrefix = "release";
 
-    bool IsOriginalRepository => GitRepository != null && GitRepository.Identifier == "MarkZither/UnOffSiSenseDotNet";
+    private const string MainBranch = "main";
+    private const string DevelopBranch = "develop";
+    private const string ReleaseBranchPrefix = "release";
 
-    string NuGetPackageSource => "https://api.nuget.org/v3/index.json";
-    string GitHubPackageSource => $"https://nuget.pkg.github.com/{GitHubActions.GitHubRepositoryOwner}/index.json";
+    private bool IsOriginalRepository => GitRepository != null && GitRepository.Identifier == "MarkZither/UnOffSiSenseDotNet";
+
+    private string NuGetPackageSource => "https://api.nuget.org/v3/index.json";
+    private string GitHubPackageSource => $"https://nuget.pkg.github.com/{GitHubActions.GitHubRepositoryOwner}/index.json";
     string Source => IsOriginalRepository ? NuGetPackageSource : GitHubPackageSource;
 
-    [Parameter] readonly string NuGetApiKey;
-    Target Clean => _ => _
-        .Before(Restore)
-        .Executes(() =>
-        {
-            SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
-            TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
-            EnsureCleanDirectory(OutputDirectory);
-        });
+    [Parameter] private readonly string NuGetApiKey;
 
-    Target Restore => _ => _
-        .Executes(() =>
-        {
-            DotNetRestore(s => s
-                .SetProjectFile(Solution));
-        });
+    private Target Clean => _ => _
+         .Before(Restore)
+         .Executes(() =>
+         {
+             SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
+             TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
+             EnsureCleanDirectory(OutputDirectory);
+         });
 
-    Target Compile => _ => _
-        .DependsOn(Restore)
-        .Executes(() =>
-        {
-            DotNetBuild(s => s
-                .SetProjectFile(Solution)
-                .SetConfiguration(Configuration)
-                .SetAssemblyVersion(GitVersion.AssemblySemVer)
-                .SetFileVersion(GitVersion.AssemblySemFileVer)
-                .SetInformationalVersion(GitVersion.InformationalVersion)
-                .EnableNoRestore());
-        });
+    private Target Restore => _ => _
+         .Executes(() =>
+         {
+             DotNetRestore(s => s
+                 .SetProjectFile(Solution));
+         });
 
-    string ChangelogFile => RootDirectory / "CHANGELOG.md";
-    AbsolutePath PackageDirectory => OutputDirectory / "packages";
-    IReadOnlyCollection<AbsolutePath> PackageFiles => PackageDirectory.GlobFiles("*.nupkg");
-    IEnumerable<string> ChangelogSectionNotes => ExtractChangelogSectionNotes(ChangelogFile);
+    private Target Compile => _ => _
+         .DependsOn(Restore)
+         .Executes(() =>
+         {
+             DotNetBuild(s => s
+                 .SetProjectFile(Solution)
+                 .SetConfiguration(Configuration)
+                 .SetAssemblyVersion(GitVersion.AssemblySemVer)
+                 .SetFileVersion(GitVersion.AssemblySemFileVer)
+                 .SetInformationalVersion(GitVersion.InformationalVersion)
+                 .EnableNoRestore());
+         });
 
-    Target Pack => _ => _
-        .DependsOn(Compile)
-        .Produces(PackageDirectory / "*.nupkg")
-        .Executes(() =>
-        {
-            DotNetPack(_ => _
-                .SetProject(Solution)
-                .SetNoBuild(InvokedTargets.Contains(Compile))
-                .SetConfiguration(Configuration)
-                .SetOutputDirectory(PackageDirectory)
-                .SetVersion(GitVersion.NuGetVersionV2)
-                .SetPackageReleaseNotes(GetNuGetReleaseNotes(ChangelogFile, GitRepository)));
-        });
+    private string ChangelogFile => RootDirectory / "CHANGELOG.md";
+    private AbsolutePath PackageDirectory => OutputDirectory / "packages";
+    private IReadOnlyCollection<AbsolutePath> PackageFiles => PackageDirectory.GlobFiles("*.nupkg");
+    private IEnumerable<string> ChangelogSectionNotes => ExtractChangelogSectionNotes(ChangelogFile);
 
-    Target Publish => _ => _
-    .ProceedAfterFailure()
-    .DependsOn(Clean/*, Test*/, Pack)
-    .Consumes(Pack)
-    .Requires(() => !NuGetApiKey.IsNullOrEmpty() || !IsOriginalRepository)
-    .Requires(() => GitHasCleanWorkingCopy())
-    .Requires(() => Configuration.Equals(Configuration.Release))
-    .Requires(() => IsOriginalRepository && GitRepository.IsOnMainBranch() ||
-                    IsOriginalRepository && GitRepository.IsOnReleaseBranch() ||
-                    !IsOriginalRepository && GitRepository.IsOnDevelopBranch())
-    .Executes(() =>
-    {
-        if (!IsOriginalRepository)
-        {
-            DotNetNuGetAddSource(_ => _
-                .SetSource(GitHubPackageSource)
-                .SetUsername(GitHubActions.GitHubActor)
-                .SetPassword(GitHubToken));
-        }
+    private Target Pack => _ => _
+         .DependsOn(Compile)
+         .Produces(PackageDirectory / "*.nupkg")
+         .Executes(() =>
+         {
+             DotNetPack(_ => _
+                 .SetProject(Solution)
+                 .SetNoBuild(InvokedTargets.Contains(Compile))
+                 .SetConfiguration(Configuration)
+                 .SetOutputDirectory(PackageDirectory)
+                 .SetVersion(GitVersion.NuGetVersionV2)
+                 .SetPackageReleaseNotes(GetNuGetReleaseNotes(ChangelogFile, GitRepository)));
+         });
 
-        Assert(PackageFiles.Count == 1, "packages.Count == 1");
+    private Target Publish => _ => _
+     .ProceedAfterFailure()
+     .DependsOn(Clean/*, Test*/, Pack)
+     .Consumes(Pack)
+     .Requires(() => !NuGetApiKey.IsNullOrEmpty() || !IsOriginalRepository)
+     .Requires(() => GitHasCleanWorkingCopy())
+     .Requires(() => Configuration.Equals(Configuration.Release))
+     .Requires(() => IsOriginalRepository && GitRepository.IsOnMainBranch() ||
+                     IsOriginalRepository && GitRepository.IsOnReleaseBranch() ||
+                     !IsOriginalRepository && GitRepository.IsOnDevelopBranch())
+     .Executes(() =>
+     {
+         if (!IsOriginalRepository)
+         {
+             DotNetNuGetAddSource(_ => _
+                 .SetSource(GitHubPackageSource)
+                 .SetUsername(GitHubActions.GitHubActor)
+                 .SetPassword(GitHubToken));
+         }
 
-        DotNetNuGetPush(_ => _
-                .SetSource(Source)
-                .SetApiKey(NuGetApiKey)
-                .CombineWith(PackageFiles, (_, v) => _
-                    .SetTargetPath(v)),
-            degreeOfParallelism: 5,
-            completeOnFailure: true);
-    });
+         Assert(PackageFiles.Count == 1, "packages.Count == 1");
+
+         DotNetNuGetPush(_ => _
+                 .SetSource(Source)
+                 .SetApiKey(NuGetApiKey)
+                 .CombineWith(PackageFiles, (_, v) => _
+                     .SetTargetPath(v)),
+             degreeOfParallelism: 5,
+             completeOnFailure: true);
+     });
 }

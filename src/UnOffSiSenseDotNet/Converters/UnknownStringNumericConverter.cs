@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Newtonsoft.Json;
+using System;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace UnOffSiSenseDotNet.Converters
 {
@@ -17,7 +13,7 @@ namespace UnOffSiSenseDotNet.Converters
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            if(reader.Value is null)
+            if (reader.Value is null)
             { return null; }
 
             if (reader.ValueType.Name == "String")
