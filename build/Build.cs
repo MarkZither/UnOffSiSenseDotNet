@@ -62,6 +62,7 @@ partial class Build : NukeBuild
     AbsolutePath OutputDirectory => RootDirectory / "output";
     
     const string MainBranch = "main";
+    const string DevelopBranch = "develop";
     const string ReleaseBranchPrefix = "release";
 
     bool IsOriginalRepository => GitRepository != null && GitRepository.Identifier == "MarkZither/UnOffSiSenseDotNet";
