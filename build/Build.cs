@@ -8,26 +8,31 @@ using Nuke.Common.Git;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
+using Nuke.Common.Tools.Coverlet;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.GitVersion;
+using Nuke.Common.Tools.ReportGenerator;
 using Nuke.Common.Utilities;
 using Nuke.Common.Utilities.Collections;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using static Nuke.Common.ChangeLog.ChangelogTasks;
 using static Nuke.Common.ControlFlow;
+using static Nuke.Common.IO.CompressionTasks;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.IO.PathConstruction;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 using static Nuke.Common.Tools.Git.GitTasks;
+using static Nuke.Common.Tools.ReportGenerator.ReportGeneratorTasks;
 
 [CheckBuildProjectConfigurations]
 [ShutdownDotNetAfterServerBuild]
 [GitHubActions(
     "dotnet-core",
     GitHubActionsImage.UbuntuLatest,
-    OnPushBranches = new[] { MainBranch, ReleaseBranchPrefix + "/*" },
+    OnPushBranches = new[] { MainBranch, DevelopBranch, ReleaseBranchPrefix + "/*" },
     InvokedTargets = new[] { nameof(Publish) },
     ImportGitHubTokenAs = nameof(GitHubToken),
     ImportSecrets =
@@ -101,6 +106,67 @@ partial class Build : NukeBuild
                  .EnableNoRestore());
          });
 
+    [Partition(2)] readonly Partition TestPartition;
+    AbsolutePath TestResultDirectory => OutputDirectory / "test-results";
+    IEnumerable<Project> TestProjects => TestPartition.GetCurrent(Solution.GetProjects("*.Tests"));
+    Target Test => _ => _
+            .DependsOn(Compile)
+            .Produces(TestResultDirectory / "*.trx")
+            .Produces(TestResultDirectory / "*.xml")
+            .Partition(() => TestPartition)
+            .Executes(() =>
+            {
+                DotNetTest(_ => _
+                    .SetConfiguration(Configuration)
+                    .SetNoBuild(InvokedTargets.Contains(Compile))
+                    .ResetVerbosity()
+                    .SetResultsDirectory(TestResultDirectory)
+                    .When(InvokedTargets.Contains(Coverage) || IsServerBuild, _ => _
+                        .EnableCollectCoverage()
+                        .SetCoverletOutputFormat(CoverletOutputFormat.cobertura)
+                        .SetExcludeByFile("*.Generated.cs")
+                        .When(IsServerBuild, _ => _
+                            .EnableUseSourceLink()))
+                    .CombineWith(TestProjects, (_, v) => _
+                        .SetProjectFile(v)
+                        .SetLogger($"trx;LogFileName={v.Name}.trx")
+                        .When(InvokedTargets.Contains(Coverage) || IsServerBuild, _ => _
+                            .SetCoverletOutput(TestResultDirectory / $"{v.Name}.xml"))));
+
+                TestResultDirectory.GlobFiles("*.trx").ForEach(x =>
+                    AzurePipelines?.PublishTestResults(
+                        type: AzurePipelinesTestResultsType.VSTest,
+                        title: $"{Path.GetFileNameWithoutExtension(x)} ({AzurePipelines.StageDisplayName})",
+                        files: new string[] { x }));
+            });
+    string CoverageReportDirectory => OutputDirectory / "coverage-report";
+    string CoverageReportArchive => OutputDirectory / "coverage-report.zip";
+
+    Target Coverage => _ => _
+        .DependsOn(Test)
+        .TriggeredBy(Test)
+        .Consumes(Test)
+        .Produces(CoverageReportArchive)
+        .Executes(() =>
+        {
+            ReportGenerator(_ => _
+                .SetReports(TestResultDirectory / "*.xml")
+                .SetReportTypes(ReportTypes.HtmlInline)
+                .SetTargetDirectory(CoverageReportDirectory)
+                .SetFramework("netcoreapp3.1"));
+
+            TestResultDirectory.GlobFiles("*.xml").ForEach(x =>
+                AzurePipelines?.PublishCodeCoverage(
+                    AzurePipelinesCodeCoverageToolType.Cobertura,
+                    x,
+                    CoverageReportDirectory));
+
+            CompressZip(
+                directory: CoverageReportDirectory,
+                archiveFile: CoverageReportArchive,
+                fileMode: FileMode.Create);
+        });
+
     private string ChangelogFile => RootDirectory / "CHANGELOG.md";
     private AbsolutePath PackageDirectory => OutputDirectory / "packages";
     private IReadOnlyCollection<AbsolutePath> PackageFiles => PackageDirectory.GlobFiles("*.nupkg");
@@ -122,7 +188,7 @@ partial class Build : NukeBuild
 
     private Target Publish => _ => _
      .ProceedAfterFailure()
-     .DependsOn(Clean/*, Test*/, Pack)
+     .DependsOn(Clean, Test, Pack)
      .Consumes(Pack)
      .Requires(() => !NuGetApiKey.IsNullOrEmpty() || !IsOriginalRepository)
      .Requires(() => GitHasCleanWorkingCopy())

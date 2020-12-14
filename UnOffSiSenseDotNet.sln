@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarkZither.UnOffSiSenseDotN
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FFF82E8B-0113-4222-BD12-A5D6CA3A8330}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnOffSiSenseDotNet.test", "tests\UnOffSiSenseDotNet.test\UnOffSiSenseDotNet.test.csproj", "{7B0F00DB-1870-44D1-ABAA-2305DB9C0538}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnOffSiSenseDotNet.Tests", "tests\UnOffSiSenseDotNet.test\UnOffSiSenseDotNet.Tests.csproj", "{7B0F00DB-1870-44D1-ABAA-2305DB9C0538}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A391CCE9-DAF3-4ACD-AC04-6E54D88BE557}"
 	ProjectSection(SolutionItems) = preProject

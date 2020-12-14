@@ -1,4 +1,4 @@
-﻿namespace UnOffSiSenseDotNet.test
+﻿namespace UnOffSiSenseDotNet.Tests
 {
     public class SiSenseConfiguration
     {
