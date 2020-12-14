@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
-using UnOffSiSenseDotNet.test.V1;
+using System;
 
-namespace UnOffSiSenseDotNet.test
+namespace UnOffSiSenseDotNet.Tests
 {
     public static class TestHelper
     {
@@ -10,7 +10,7 @@ namespace UnOffSiSenseDotNet.test
             return new ConfigurationBuilder()
                 .SetBasePath(outputPath)
                 .AddJsonFile("appsettings.json", optional: true)
-                .AddUserSecrets<SiSenseSDKExtensionsTests>()
+                .AddUserSecrets<AuthenticationApiClientTests>()
                 .AddEnvironmentVariables()
                 .Build();
         }
@@ -27,5 +27,20 @@ namespace UnOffSiSenseDotNet.test
 
             return configuration;
         }
+    }
+    public sealed class Authorization
+    {
+        private static readonly Lazy<Authorization>
+            lazy =
+            new Lazy<Authorization>
+                (() => new Authorization());
+
+        public static Authorization Instance { get { return lazy.Value; } }
+
+        private Authorization()
+        {
+        }
+
+        public string token;
     }
 }

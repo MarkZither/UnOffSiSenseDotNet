@@ -20,6 +20,7 @@ on:
   push:
     branches:
       - main
+      - develop
       - release/*
 
 jobs:
@@ -37,3 +38,11 @@ jobs:
         with:
           name: packages
           path: output/packages
+      - uses: actions/upload-artifact@v1
+        with:
+          name: test-results
+          path: output/test-results
+      - uses: actions/upload-artifact@v1
+        with:
+          name: coverage-report.zip
+          path: output/coverage-report.zip
