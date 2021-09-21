@@ -31,7 +31,7 @@ using static Nuke.Common.Tools.ReportGenerator.ReportGeneratorTasks;
 [ShutdownDotNetAfterServerBuild]
 [GitHubActions(
     "dotnet-core",
-    GitHubActionsImage.UbuntuLatest,
+    GitHubActionsImage.WindowsLatest,
     OnPushBranches = new[] { MainBranch, DevelopBranch, ReleaseBranchPrefix + "/*" },
     InvokedTargets = new[] { nameof(Publish) },
     ImportGitHubTokenAs = nameof(GitHubToken),
