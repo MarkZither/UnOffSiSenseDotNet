@@ -42,11 +42,13 @@ using static Nuke.Common.Tools.ReportGenerator.ReportGeneratorTasks;
         })]
 partial class Build : NukeBuild
 {
+    /// <summary>
     /// Support plugins are available for:
     ///   - JetBrains ReSharper        https://nuke.build/resharper
     ///   - JetBrains Rider            https://nuke.build/rider
     ///   - Microsoft VisualStudio     https://nuke.build/visualstudio
     ///   - Microsoft VSCode           https://nuke.build/vscode
+    /// </summary>
 
     public static int Main() => Execute<Build>(x => x.Compile);
 
@@ -118,6 +120,7 @@ partial class Build : NukeBuild
             {
                 DotNetTest(_ => _
                     .SetConfiguration(Configuration)
+                    .SetFilter("Category=Unit")
                     .SetNoBuild(InvokedTargets.Contains(Compile))
                     .ResetVerbosity()
                     .SetResultsDirectory(TestResultDirectory)
@@ -153,7 +156,7 @@ partial class Build : NukeBuild
                 .SetReports(TestResultDirectory / "*.xml")
                 .SetReportTypes(ReportTypes.HtmlInline)
                 .SetTargetDirectory(CoverageReportDirectory)
-                .SetFramework("netcoreapp3.1"));
+                .SetFramework("netcoreapp2.1"));
 
             TestResultDirectory.GlobFiles("*.xml").ForEach(x =>
                 AzurePipelines?.PublishCodeCoverage(
