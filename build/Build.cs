@@ -191,14 +191,14 @@ partial class Build : NukeBuild
 
     private Target Publish => _ => _
      .ProceedAfterFailure()
-     .DependsOn(Clean, Test, Pack)
+     .DependsOn(Clean, Compile, Pack)
      .Consumes(Pack)
      .Requires(() => !NuGetApiKey.IsNullOrEmpty() || !IsOriginalRepository)
      .Requires(() => GitHasCleanWorkingCopy())
      .Requires(() => Configuration.Equals(Configuration.Release))
      .Requires(() => IsOriginalRepository && GitRepository.IsOnMainBranch() ||
                      IsOriginalRepository && GitRepository.IsOnReleaseBranch() ||
-                     !IsOriginalRepository && GitRepository.IsOnDevelopBranch())
+                     IsOriginalRepository && GitRepository.IsOnDevelopBranch())
      .Executes(() =>
      {
          if (!IsOriginalRepository)
