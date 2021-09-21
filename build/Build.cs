@@ -61,7 +61,7 @@ partial class Build : NukeBuild
 
     [Solution] private readonly Solution Solution;
     [GitRepository] private readonly GitRepository GitRepository;
-    [GitVersion(Framework = "netcoreapp3.1")] private readonly GitVersion GitVersion;
+    [GitVersion(Framework = "net5.0")] private readonly GitVersion GitVersion;
 
     AbsolutePath SourceDirectory => RootDirectory / "src";
     AbsolutePath TestsDirectory => RootDirectory / "tests";
@@ -107,15 +107,13 @@ partial class Build : NukeBuild
                  .SetInformationalVersion(GitVersion.InformationalVersion)
                  .EnableNoRestore());
          });
-
-    [Partition(2)] readonly Partition TestPartition;
     AbsolutePath TestResultDirectory => OutputDirectory / "test-results";
-    IEnumerable<Project> TestProjects => TestPartition.GetCurrent(Solution.GetProjects("*.Tests"));
+    IEnumerable<Project> TestProjects => Partition.GetCurrent(Solution.GetProjects("*.Tests"));
     Target Test => _ => _
             .DependsOn(Compile)
             .Produces(TestResultDirectory / "*.trx")
             .Produces(TestResultDirectory / "*.xml")
-            .Partition(() => TestPartition)
+            .Partition(2)
             .Executes(() =>
             {
                 DotNetTest(_ => _
@@ -132,7 +130,7 @@ partial class Build : NukeBuild
                             .EnableUseSourceLink()))
                     .CombineWith(TestProjects, (_, v) => _
                         .SetProjectFile(v)
-                        .SetLogger($"trx;LogFileName={v.Name}.trx")
+                        .SetLoggers($"trx;LogFileName={v.Name}.trx")
                         .When(InvokedTargets.Contains(Coverage) || IsServerBuild, _ => _
                             .SetCoverletOutput(TestResultDirectory / $"{v.Name}.xml"))));
 
@@ -156,7 +154,7 @@ partial class Build : NukeBuild
                 .SetReports(TestResultDirectory / "*.xml")
                 .SetReportTypes(ReportTypes.HtmlInline)
                 .SetTargetDirectory(CoverageReportDirectory)
-                .SetFramework("netcoreapp2.1"));
+                .SetFramework("net5.0"));
 
             TestResultDirectory.GlobFiles("*.xml").ForEach(x =>
                 AzurePipelines?.PublishCodeCoverage(
