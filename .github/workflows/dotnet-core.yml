@@ -29,6 +29,10 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v1
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9.7
+        with:
+          versionSpec: '5.7.0'
       - name: Cache .nuke/temp, ~/.nuget/packages
         uses: actions/cache@v2
         with:
